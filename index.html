@@ -5,309 +5,512 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alireza Ahmadi — Backend Developer (.NET)</title>
 <meta name="description" content="Alireza Ahmadi — backend developer (.NET) in Tehran. Travel booking, customer engagement, fintech panels, mobile games and web experiments.">
+<meta name="theme-color" content="#07080d">
 <meta property="og:title" content="Alireza Ahmadi — Backend Developer (.NET)">
 <meta property="og:description" content="Travel booking, customer engagement, fintech panels, mobile games and web experiments.">
 <meta property="og:image" content="https://awlirezaz.github.io/assets/upliftdone.jpg">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%233451d1'/><text x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='white'>AA</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%237c8cff'/><stop offset='1' stop-color='%2322d3ee'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><text x='32' y='42' font-family='Arial' font-size='26' font-weight='800' text-anchor='middle' fill='%2307080d'>AA</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script>
-  // Apply the saved theme before first paint (falls back to the system setting).
-  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t } catch (e) {}
+  // Dark by default; remember the visitor's choice. Applied before first paint to avoid a flash.
+  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light' } catch (e) {}
 </script>
 <style>
+/* ================================================================
+   Design tokens — dark is the default, light via the toggle
+   ================================================================ */
 :root {
-  --bg: #faf9f6;
-  --surface: #ffffff;
-  --soft: #f1efe9;
-  --line: #e4e1d8;
-  --ink: #16161a;
-  --body: #45444d;
-  --muted: #76757f;
-  --accent: #3451d1;
-  --accent-soft: #e8ecfd;
-  --accent-ink: #2a40a8;
-  --good: #11865a;
-  --shadow: 0 1px 2px rgb(20 20 30 / 0.04), 0 8px 30px rgb(20 20 30 / 0.07);
-  --code-bg: #15161c;
-  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --bg: #07080d;
+  --bg-2: #0b0d15;
+  --surface: #10121b;
+  --surface-2: #161926;
+  --line: rgb(255 255 255 / 0.08);
+  --line-2: rgb(255 255 255 / 0.14);
+  --ink: #f4f4f7;
+  --body: #b8bbcb;
+  --muted: #7c8095;
+  --accent: #7c8cff;
+  --accent-2: #22d3ee;
+  --accent-3: #f472b6;
+  --accent-rgb: 124 140 255;
+  --cyan-rgb: 34 211 238;
+  --good: #34d399;
+  --warn: #fbbf24;
+  --chip: rgb(255 255 255 / 0.05);
+  --shadow: 0 20px 60px rgb(0 0 0 / 0.45);
+  --grad: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 45%, var(--accent-3) 100%);
+  --display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #f6f6f3; --bg-2: #efeee9; --surface: #ffffff; --surface-2: #f4f3ef;
+  --line: rgb(20 20 40 / 0.09); --line-2: rgb(20 20 40 / 0.16);
+  --ink: #14141c; --body: #44465a; --muted: #75778a;
+  --accent: #4b5ae8; --accent-2: #0891b2; --accent-3: #db2777;
+  --accent-rgb: 75 90 232; --cyan-rgb: 8 145 178; --good: #0f9f6e; --warn: #b7791f;
+  --chip: rgb(20 20 40 / 0.045); --shadow: 0 20px 50px rgb(20 20 40 / 0.12);
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1014; --surface: #17181e; --soft: #1e2028; --line: #2a2c36; --ink: #f3f2ee; --body: #c5c4cc;
-    --muted: #8c8b96; --accent: #8da2ff; --accent-soft: #1f2645; --accent-ink: #b3c0ff; --good: #4fd39b;
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 40px rgb(0 0 0 / 0.35); --code-bg: #0b0c10; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0f1014; --surface: #17181e; --soft: #1e2028; --line: #2a2c36; --ink: #f3f2ee; --body: #c5c4cc;
-  --muted: #8c8b96; --accent: #8da2ff; --accent-soft: #1f2645; --accent-ink: #b3c0ff; --good: #4fd39b;
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 40px rgb(0 0 0 / 0.35); --code-bg: #0b0c10; color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--bg); color: var(--body);
-  font: 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased;
+  font: 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  transition: background-color .4s, color .4s;
 }
 a { color: inherit; }
 img { display: block; max-width: 100%; height: auto; }
 h1, h2, h3 { color: var(--ink); margin: 0; }
-.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+::selection { background: rgb(var(--accent-rgb) / 0.35); color: var(--ink); }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+.mono { font-family: var(--mono); }
+.grad-text { background: var(--grad); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 8s linear infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
 
-/* ---------- Nav ---------- */
+/* Film grain + cursor glow, purely decorative */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 100; pointer-events: none; opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-theme="light"] body::before { opacity: .03; }
+.cursor-glow {
+  position: fixed; left: 0; top: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px; z-index: 0;
+  border-radius: 50%; pointer-events: none; opacity: 0; transition: opacity .4s;
+  background: radial-gradient(circle, rgb(var(--accent-rgb) / 0.10), transparent 65%);
+  will-change: transform;
+}
+body.has-pointer .cursor-glow { opacity: 1; }
+
+/* Scroll progress */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60; transform-origin: 0 50%; transform: scaleX(0); background: var(--grad); }
+
+/* ================================================================
+   Nav
+   ================================================================ */
 .nav {
-  position: sticky; top: 0; z-index: 10;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px);
-  border-bottom: 1px solid var(--line);
+  position: fixed; top: 14px; left: 50%; z-index: 50; transform: translateX(-50%);
+  width: min(1112px, calc(100% - 28px)); border-radius: 16px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent); border: 1px solid var(--line);
+  backdrop-filter: saturate(1.5) blur(16px); -webkit-backdrop-filter: saturate(1.5) blur(16px);
+  transition: top .3s var(--ease), box-shadow .3s;
 }
-.nav .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; color: var(--ink); }
-.logo-mark {
-  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
-  background: var(--accent); color: #fff; font: 650 14px/1 var(--serif); letter-spacing: 0.02em;
+.nav.scrolled { box-shadow: var(--shadow); }
+.nav-inner { display: flex; align-items: center; gap: 20px; height: 58px; padding: 0 10px 0 14px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 600 15px/1 var(--display); color: var(--ink); }
+.logo-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: var(--grad); color: #07080d; font: 700 13px/1 var(--display); }
+.nav-links { display: flex; gap: 4px; margin-left: auto; }
+.nav-links a {
+  position: relative; text-decoration: none; font-size: 14px; color: var(--muted); padding: 8px 12px; border-radius: 10px;
+  transition: color .2s, background .2s;
 }
-.nav-links { display: flex; gap: 22px; margin-left: auto; }
-.nav-links a { text-decoration: none; font-size: 14px; color: var(--muted); transition: color .15s; }
-.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover { color: var(--ink); background: var(--chip); }
+.nav-links a.active { color: var(--ink); }
+.nav-links a.active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px; border-radius: 2px; background: var(--grad); }
 .nav-actions { display: flex; gap: 8px; align-items: center; }
 .icon-btn {
-  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px;
-  border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer;
+  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--chip); color: var(--ink); transition: border-color .2s, transform .2s;
 }
+.icon-btn:hover { border-color: var(--line-2); }
 .icon-btn svg { width: 18px; height: 18px; }
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 10px;
-  font: 500 14px/1 var(--sans); text-decoration: none; white-space: nowrap; cursor: pointer;
-  border: 1px solid var(--line); background: var(--surface); color: var(--ink); transition: transform .15s, border-color .15s;
+  position: relative; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: 11px;
+  font: 500 14px/1 var(--sans); text-decoration: none; white-space: nowrap; cursor: pointer; color: var(--ink);
+  border: 1px solid var(--line-2); background: var(--chip); transition: border-color .2s, background .2s, transform .25s var(--ease);
 }
-.btn:hover { border-color: var(--muted); }
+.btn:hover { border-color: rgb(var(--accent-rgb) / 0.6); background: rgb(var(--accent-rgb) / 0.08); }
+.btn svg { width: 16px; height: 16px; flex: none; }
 .btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.btn-primary:hover { transform: translateY(-1px); border-color: var(--ink); }
-.btn svg { width: 16px; height: 16px; }
+.btn-primary:hover { background: var(--ink); border-color: var(--ink); box-shadow: 0 0 0 4px rgb(var(--accent-rgb) / 0.25), 0 10px 30px rgb(var(--accent-rgb) / 0.35); }
 
-/* ---------- Hero ---------- */
-.hero { padding: 88px 0 72px; }
-.hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
-/* Let grid columns shrink below their content width (the code box would otherwise push the page wider than a phone). */
-.hero-grid > *, .project > *, .oss > *, .contact > * { min-width: 0; }
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 8px; font: 500 13px/1 var(--mono); color: var(--accent-ink);
-  background: var(--accent-soft); padding: 8px 12px; border-radius: 999px;
+/* ================================================================
+   Hero
+   ================================================================ */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; }
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 15% 30%, rgb(var(--accent-rgb) / 0.16), transparent 70%),
+    radial-gradient(50% 45% at 90% 70%, rgb(var(--cyan-rgb) / 0.10), transparent 70%),
+    linear-gradient(to bottom, transparent 70%, var(--bg));
 }
-.eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 4px color-mix(in srgb, var(--good) 22%, transparent); }
-.hero h1 { font: 650 clamp(44px, 6.2vw, 76px)/1.02 var(--serif); letter-spacing: -0.025em; margin: 22px 0 18px; }
-.hero h1 em { font-style: normal; color: var(--accent); }
-.lead { font-size: 19px; line-height: 1.6; max-width: 34em; margin: 0; }
-.contact-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.hero .wrap { position: relative; z-index: 1; width: 100%; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+.hero-grid > *, .project > *, .contact-card > *, .split > *, .status-list li > * { min-width: 0; }
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 12px; border-radius: 999px;
+  font: 500 12.5px/1 var(--mono); color: var(--body); background: var(--chip); border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+.pulse { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+.pulse::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--good); animation: ping 2s var(--ease) infinite; }
+@keyframes ping { from { transform: scale(.5); opacity: .9; } to { transform: scale(2.2); opacity: 0; } }
+
+.hero h1 { font: 700 clamp(52px, 8.4vw, 112px)/0.95 var(--display); letter-spacing: -0.045em; margin: 26px 0 22px; }
+.hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
+.char { display: inline-block; transform: translateY(105%); animation: rise .9s var(--ease) forwards; animation-delay: calc(var(--i) * 38ms + 150ms); }
+/* Gradient text can't clip through individually animated letters, so each letter paints its own
+   slice of one shared gradient (JS sets --lw = line width and --cx = the letter's offset). */
+.hero h1 .grad-text { background: none; color: var(--accent); animation: none; }
+.hero h1 .grad-text .char {
+  background: var(--grad); background-size: var(--lw, 100%) 100%; background-position: calc(-1 * var(--cx, 0px)) 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+@keyframes rise { to { transform: none; } }
+
+.role-line { font: 500 clamp(19px, 2.1vw, 24px)/1.4 var(--display); color: var(--ink); margin: 0 0 16px; }
+.typer { color: var(--accent-2); white-space: nowrap; }
+.typer::after { content: "▍"; margin-left: 2px; color: var(--accent); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.lead { font-size: 17.5px; line-height: 1.7; max-width: 33em; margin: 0; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.contact-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
 .chip {
-  display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px; font-size: 14px;
-  background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--ink); transition: border-color .15s;
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 10px; font-size: 13.5px;
+  background: var(--chip); border: 1px solid var(--line); text-decoration: none; color: var(--body); transition: border-color .2s, color .2s;
 }
-a.chip:hover { border-color: var(--accent); }
-.chip svg { width: 16px; height: 16px; color: var(--muted); flex: none; }
+a.chip:hover, button.chip:hover { border-color: rgb(var(--accent-rgb) / 0.6); color: var(--ink); }
+button.chip { font: inherit; font-size: 13.5px; cursor: pointer; }
+.chip svg { width: 15px; height: 15px; color: var(--muted); flex: none; }
 
-.code {
-  background: var(--code-bg); color: #e6e6ec; border-radius: 18px; box-shadow: var(--shadow);
-  font: 14px/1.75 var(--mono); overflow: hidden; border: 1px solid rgb(255 255 255 / 0.06);
+/* The "server" terminal */
+.terminal {
+  position: relative; border-radius: 18px; overflow: hidden; background: rgb(8 9 14 / 0.82); color: #dfe1ea;
+  border: 1px solid rgb(255 255 255 / 0.1); box-shadow: 0 30px 80px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(var(--accent-rgb) / 0.08);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  font: 13px/1.7 var(--mono); transform: perspective(1200px) rotateY(-6deg) rotateX(3deg); transition: transform .6s var(--ease);
 }
-.code-bar { display: flex; align-items: center; gap: 7px; padding: 14px 16px; border-bottom: 1px solid rgb(255 255 255 / 0.07); }
-.code-bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a3b45; }
-.code-bar span { margin-left: 10px; font-size: 12px; color: #8b8b98; }
-.code pre { margin: 0; padding: 20px 22px 24px; white-space: pre; overflow-x: auto; }
-.k { color: #c792ea; } .t { color: #82aaff; } .s { color: #c3e88d; } .p { color: #89ddff; } .c { color: #676e95; } .n { color: #f78c6c; }
+.terminal:hover { transform: perspective(1200px) rotateY(0) rotateX(0); }
+.term-bar { display: flex; align-items: center; gap: 7px; padding: 12px 14px; border-bottom: 1px solid rgb(255 255 255 / 0.07); background: rgb(255 255 255 / 0.03); }
+.term-bar i { width: 11px; height: 11px; border-radius: 50%; }
+.term-bar i:nth-child(1) { background: #ff5f57; } .term-bar i:nth-child(2) { background: #febc2e; } .term-bar i:nth-child(3) { background: #28c840; }
+.term-bar span { margin-left: 10px; font-size: 12px; color: #8b8fa3; }
+.term-bar .live { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 11px; color: #8b8fa3; }
+.term-bar .live b { width: 6px; height: 6px; border-radius: 50%; background: #28c840; box-shadow: 0 0 8px #28c840; }
+.term-body { height: 340px; overflow: hidden; padding: 16px 18px; display: flex; flex-direction: column; justify-content: flex-end; }
+.term-body .ln { white-space: pre-wrap; word-break: break-word; animation: lnIn .25s var(--ease); }
+@keyframes lnIn { from { opacity: 0; transform: translateY(4px); } }
+.t-prompt { color: #7ee787; } .t-cmd { color: #f0f0f5; } .t-dim { color: #6b7088; } .t-info { color: #79c0ff; }
+.t-ok { color: #3fb950; } .t-warn { color: #e3b341; } .t-acc { color: #d2a8ff; } .t-url { color: #a5d6ff; text-decoration: underline; text-decoration-color: rgb(165 214 255 / .35); }
+.caret { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: #dfe1ea; animation: blink 1s steps(1) infinite; }
 
+.scroll-hint { position: absolute; left: 50%; bottom: 26px; z-index: 1; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font: 11px/1 var(--mono); color: var(--muted); letter-spacing: .14em; text-transform: uppercase; }
+.scroll-hint i { width: 22px; height: 34px; border-radius: 12px; border: 1.5px solid var(--line-2); position: relative; }
+.scroll-hint i::after { content: ""; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: var(--ink); animation: wheel 1.8s var(--ease) infinite; }
+@keyframes wheel { from { transform: translateY(0); opacity: 1; } to { transform: translateY(11px); opacity: 0; } }
 
-/* ---------- Sections ---------- */
-section { padding: 72px 0; }
-.section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
-.kicker { font: 500 13px/1 var(--mono); color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.08em; }
-.section-head h2 { font: 650 clamp(30px, 3.6vw, 42px)/1.1 var(--serif); letter-spacing: -0.02em; margin-top: 12px; }
-.section-head p { max-width: 30em; margin: 0; color: var(--muted); }
+/* ================================================================
+   Marquee
+   ================================================================ */
+.marquee { position: relative; padding: 26px 0; border-block: 1px solid var(--line); overflow: hidden; background: var(--bg-2);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-row { display: flex; gap: 14px; width: max-content; animation: marquee 40s linear infinite; }
+.marquee-row + .marquee-row { margin-top: 14px; animation-direction: reverse; animation-duration: 46s; }
+.marquee:hover .marquee-row { animation-play-state: paused; }
+.marquee span { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); font: 500 15px/1 var(--display); color: var(--ink); white-space: nowrap; }
+.marquee span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--grad); }
+@keyframes marquee { to { transform: translateX(-50%); } }
 
-/* Browser-framed screenshot */
-.shot { border-radius: 14px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
-.shot-bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: var(--soft); border-bottom: 1px solid var(--line); }
-.shot-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
-.shot-bar span {
-  margin-left: 8px; flex: 1; font: 12px/1 var(--mono); color: var(--muted); background: var(--surface);
-  border-radius: 6px; padding: 6px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+/* ================================================================
+   Sections
+   ================================================================ */
+section { position: relative; padding: 110px 0; }
+.section-head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: end; margin-bottom: 50px; }
+.kicker { display: inline-flex; align-items: center; gap: 10px; font: 500 12.5px/1 var(--mono); color: var(--accent-2); text-transform: uppercase; letter-spacing: .12em; }
+.kicker::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+.section-head h2 { font: 700 clamp(36px, 4.8vw, 60px)/1.02 var(--display); letter-spacing: -0.035em; margin-top: 16px; }
+.section-head p { margin: 0; color: var(--muted); font-size: 16.5px; max-width: 30em; justify-self: end; }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(34px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* Cursor spotlight on cards */
+.spot { position: relative; isolation: isolate; }
+.spot::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; opacity: 0; transition: opacity .3s; pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--accent-rgb) / 0.13), transparent 60%);
 }
-.shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+.spot::after {
+  content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: inherit; padding: 1px; opacity: 0; transition: opacity .3s; pointer-events: none;
+  background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--cyan-rgb) / 0.75), transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.spot:hover::before, .spot:hover::after { opacity: 1; }
 
-/* Featured work */
-.work { display: grid; gap: 28px; }
+/* Browser-framed screenshot with 3D tilt + glare */
+.tilt-wrap { perspective: 1100px; }
+.shot {
+  position: relative; border-radius: 14px; overflow: hidden; background: var(--surface-2); border: 1px solid var(--line-2);
+  box-shadow: var(--shadow); transform-style: preserve-3d; transition: transform .5s var(--ease); will-change: transform;
+}
+.shot-bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.shot-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-2); }
+.shot-bar span { margin-left: 8px; flex: 1; font: 11.5px/1 var(--mono); color: var(--muted); background: var(--chip); border-radius: 6px; padding: 6px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform 1.2s var(--ease); }
+.shot .glare {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s; mix-blend-mode: soft-light;
+  background: radial-gradient(500px circle at var(--gx, 50%) var(--gy, 0%), rgb(255 255 255 / 0.55), transparent 55%);
+}
+.tilt-wrap:hover .shot .glare { opacity: 1; }
+.tilt-wrap:hover .shot img { transform: scale(1.04); }
+
+/* ================================================================
+   Work
+   ================================================================ */
+.work { display: grid; gap: 30px; }
 .project {
-  display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px;
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center;
+  background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--line); border-radius: 26px; padding: 30px;
 }
-.project:nth-child(even) .shot { order: 2; }
+.project:nth-child(even) .tilt-wrap { order: 2; }
+.p-index { font: 700 13px/1 var(--mono); color: var(--muted); }
+.p-index b { color: var(--accent-2); font-weight: 700; }
 .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font: 500 12px/1 var(--mono); color: var(--muted); }
-.meta .role { color: var(--good); }
-.project h3 { font: 650 30px/1.15 var(--serif); letter-spacing: -0.015em; margin: 14px 0 6px; }
-.project .sub { color: var(--accent-ink); font-weight: 500; margin: 0 0 14px; }
-.project p { margin: 0 0 16px; }
+.role { color: var(--good); }
+.project h3 { font: 700 clamp(30px, 3.4vw, 40px)/1.05 var(--display); letter-spacing: -0.03em; margin: 16px 0 8px; }
+.project .sub { margin: 0 0 16px; font-weight: 500; }
+.project p { margin: 0 0 18px; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 22px; padding: 0; list-style: none; }
-.tags li { font-size: 13px; padding: 5px 10px; border-radius: 8px; background: var(--soft); color: var(--body); }
+.tags li { font: 500 12.5px/1 var(--mono); padding: 7px 10px; border-radius: 8px; background: var(--chip); border: 1px solid var(--line); color: var(--body); }
 .links { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn .arrow { transition: transform .3s var(--ease); }
+.btn:hover .arrow { transform: translate(2px, -2px); }
 
-/* Games */
+/* ================================================================
+   Games
+   ================================================================ */
 .games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .game {
-  display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px;
-  text-decoration: none; color: inherit; transition: transform .2s, box-shadow .2s, border-color .2s;
+  display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 24px;
+  text-decoration: none; color: inherit; transition: transform .4s var(--ease), border-color .3s;
 }
-.game:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); }
-.game img { width: 76px; height: 76px; border-radius: 20px; box-shadow: 0 6px 18px rgb(0 0 0 / 0.12); }
-.game h3 { font: 600 18px/1.3 var(--sans); margin: 18px 0 6px; }
-.game p { margin: 0 0 18px; font-size: 14.5px; line-height: 1.55; }
+.game:hover { transform: translateY(-6px); }
+.game-icon { position: relative; width: 84px; height: 84px; }
+.game-icon img { width: 84px; height: 84px; border-radius: 22px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.35); animation: float 5s ease-in-out infinite; animation-delay: calc(var(--d, 0) * -1.2s); }
+.game-icon::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: -14px; height: 10px; border-radius: 50%; background: rgb(0 0 0 / 0.35); filter: blur(6px); animation: shadow 5s ease-in-out infinite; animation-delay: calc(var(--d, 0) * -1.2s); }
+@keyframes float { 50% { transform: translateY(-8px) rotate(-2deg); } }
+@keyframes shadow { 50% { transform: scaleX(.78); opacity: .55; } }
+.game h3 { font: 600 20px/1.25 var(--display); margin: 26px 0 8px; }
+.game p { margin: 0 0 20px; font-size: 14.5px; line-height: 1.55; }
 .game .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font: 500 12.5px/1 var(--mono); color: var(--muted); }
 .downloads { color: var(--good); }
-.publisher { margin-top: 18px; font-size: 14px; color: var(--muted); }
+.publisher { margin-top: 22px; font-size: 14px; color: var(--muted); }
+.publisher b { color: var(--body); }
 
-/* Side projects */
+/* ================================================================
+   Side projects
+   ================================================================ */
 .side { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
-.card .shot { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; }
-.card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
-.card h3 { font: 650 22px/1.2 var(--serif); margin: 10px 0 8px; }
-.card p { margin: 0 0 16px; font-size: 15px; }
+.card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+.card .tilt-wrap { padding: 14px 14px 0; }
+.card .shot { box-shadow: 0 10px 30px rgb(0 0 0 / 0.3); }
+.card-body { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+.card h3 { font: 700 24px/1.15 var(--display); letter-spacing: -0.02em; margin: 12px 0 8px; }
+.card p { margin: 0 0 18px; font-size: 15px; }
 .card .links { margin-top: auto; }
 
-/* Open source */
-.oss { display: grid; gap: 22px; }
-.oss-main { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
-.oss-main h3 { font: 650 26px/1.2 var(--serif); margin: 12px 0 8px; display: flex; align-items: center; gap: 12px; }
-.oss-main p { max-width: 62ch; }
-.star { font: 500 13px/1 var(--mono); color: #b7791f; background: #fdf3dc; padding: 6px 10px; border-radius: 8px; }
-:root[data-theme="dark"] .star { background: #3a2f14; color: #f5c66b; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .star { background: #3a2f14; color: #f5c66b; } }
+/* ================================================================
+   Open source (DNSify) + live status
+   ================================================================ */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px; }
+.panel h3 { font: 700 30px/1.1 var(--display); letter-spacing: -0.02em; margin: 14px 0 10px; display: flex; align-items: center; gap: 12px; }
+.star { font: 600 13px/1 var(--mono); color: var(--warn); background: rgb(251 191 36 / 0.12); border: 1px solid rgb(251 191 36 / 0.25); padding: 6px 10px; border-radius: 8px; }
+.panel p { margin: 0 0 18px; }
+.mini-term { margin: 0 0 20px; border-radius: 12px; background: rgb(8 9 14 / 0.9); border: 1px solid rgb(255 255 255 / 0.08); padding: 14px 16px; font: 12.5px/1.75 var(--mono); color: #dfe1ea; min-height: 178px; }
 
-/* Skills */
+.status-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 6px; }
+.status-head h3 { margin: 0; font-size: 22px; }
+.all-ok { display: inline-flex; align-items: center; gap: 8px; font: 500 12.5px/1 var(--mono); color: var(--good); }
+.status-note { margin: 0 0 14px; font-size: 13.5px; color: var(--muted); }
+.status-list { list-style: none; margin: 0; padding: 0; }
+.status-list li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 11px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+.status-list .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); transition: background .3s, box-shadow .3s; }
+.status-list .dot.up { background: var(--good); box-shadow: 0 0 10px var(--good); }
+.status-list .dot.lock { background: var(--warn); }
+.status-list .ms { font: 500 12.5px/1 var(--mono); color: var(--muted); min-width: 74px; text-align: right; }
+.status-list .ms.up { color: var(--good); }
+.status-list a { text-decoration: none; color: var(--ink); }
+.status-list a:hover { color: var(--accent-2); }
+.status-list small { display: block; font: 11.5px/1.3 var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+
+/* ================================================================
+   Skills
+   ================================================================ */
 .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.skill { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px; }
-.skill.primary { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-.skill h3 { font: 600 17px/1.3 var(--sans); margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
-.skill .note { font-size: 14px; color: var(--muted); margin: 0 0 16px; }
-.badge { font: 500 11px/1 var(--mono); color: var(--accent-ink); background: var(--accent-soft); padding: 5px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+.skill { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px; }
+.skill.primary { background: linear-gradient(160deg, rgb(var(--accent-rgb) / 0.14), var(--surface) 55%); border-color: rgb(var(--accent-rgb) / 0.4); }
+.skill-ico { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px; background: var(--chip); border: 1px solid var(--line); color: var(--accent-2); margin-bottom: 18px; }
+.skill-ico svg { width: 22px; height: 22px; }
+.skill h3 { font: 700 21px/1.25 var(--display); margin: 0 0 6px; display: flex; align-items: center; gap: 10px; }
+.skill .note { font-size: 14.5px; color: var(--muted); margin: 0 0 18px; }
+.badge { font: 600 10.5px/1 var(--mono); color: #07080d; background: var(--grad); padding: 5px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: .08em; }
 
-/* Contact */
-.contact {
-  background: var(--ink); color: var(--bg); border-radius: 28px; padding: 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center;
+/* ================================================================
+   Contact
+   ================================================================ */
+.contact-card {
+  position: relative; overflow: hidden; border-radius: 32px; padding: 72px 56px; border: 1px solid var(--line-2);
+  background: radial-gradient(80% 120% at 0% 0%, rgb(var(--accent-rgb) / 0.22), transparent 60%), radial-gradient(70% 120% at 100% 100%, rgb(var(--cyan-rgb) / 0.16), transparent 60%), var(--surface);
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center;
 }
-.contact h2 { color: var(--bg); font: 650 clamp(32px, 4vw, 48px)/1.08 var(--serif); letter-spacing: -0.02em; }
-.contact p { color: color-mix(in srgb, var(--bg) 72%, transparent); margin: 14px 0 0; font-size: 17px; }
+.contact-card h2 { font: 700 clamp(40px, 5.6vw, 72px)/0.98 var(--display); letter-spacing: -0.04em; }
+.contact-card p { margin: 18px 0 0; font-size: 17px; max-width: 28em; }
 .contact-list { display: grid; gap: 10px; }
-.contact-list a {
-  display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 14px; text-decoration: none;
-  background: color-mix(in srgb, var(--bg) 8%, transparent); border: 1px solid color-mix(in srgb, var(--bg) 14%, transparent);
-  color: var(--bg); font-size: 15.5px; transition: background .15s;
+.contact-list a, .contact-list button {
+  display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 16px; text-decoration: none; text-align: left;
+  background: rgb(255 255 255 / 0.03); border: 1px solid var(--line-2); color: var(--ink); font: 500 15.5px/1.2 var(--sans); cursor: pointer;
+  transition: border-color .2s, background .2s, transform .25s var(--ease);
 }
-.contact-list a:hover { background: color-mix(in srgb, var(--bg) 14%, transparent); }
-.contact-list svg { width: 18px; height: 18px; opacity: 0.75; flex: none; }
+:root[data-theme="light"] .contact-list a, :root[data-theme="light"] .contact-list button { background: rgb(255 255 255 / 0.7); }
+.contact-list a:hover, .contact-list button:hover { border-color: rgb(var(--accent-rgb) / 0.6); background: rgb(var(--accent-rgb) / 0.08); }
+.contact-list svg { width: 20px; height: 20px; color: var(--accent-2); flex: none; }
+.contact-list .hint { margin-left: auto; font: 500 11.5px/1 var(--mono); color: var(--muted); }
 
-footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; }
-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.toast {
+  position: fixed; left: 50%; bottom: 28px; z-index: 70; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  padding: 12px 18px; border-radius: 12px; background: var(--ink); color: var(--bg); font: 500 14px/1 var(--sans);
+  transition: opacity .3s, transform .3s var(--ease); box-shadow: var(--shadow);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+footer { padding: 46px 0 60px; color: var(--muted); font-size: 13.5px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+footer .mono { font-size: 12.5px; }
+footer a { color: var(--body); }
 .print-only { display: none; }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 960px) {
-  .hero-grid, .project, .oss, .contact { grid-template-columns: 1fr; }
-  .project:nth-child(even) .shot { order: 0; }
+/* ================================================================
+   Responsive
+   ================================================================ */
+@media (max-width: 980px) {
+  .hero-grid, .project, .split, .contact-card, .section-head { grid-template-columns: 1fr; }
+  .section-head p { justify-self: start; }
+  .project:nth-child(even) .tilt-wrap { order: 0; }
   .games { grid-template-columns: repeat(2, 1fr); }
   .side, .skills { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
   .nav-actions { margin-left: auto; }
+  .terminal { transform: none; }
+  .term-body { height: 260px; }
+  .hero { min-height: 0; }
 }
 @media (max-width: 640px) {
   .wrap { padding: 0 16px; }
-  .hero { padding: 56px 0 48px; }
+  section { padding: 76px 0; }
+  .hero { padding: 104px 0 60px; }
   .games, .side, .skills { grid-template-columns: 1fr; }
-  .project { padding: 18px; }
-  .contact { padding: 32px 22px; border-radius: 22px; }
-  .section-head { flex-direction: column; align-items: start; }
+  .project { padding: 16px; border-radius: 20px; gap: 26px; }
+  .contact-card { padding: 40px 22px; border-radius: 24px; }
   .btn-label { display: none; }
+  .scroll-hint { display: none; }
+  .term-body { height: 220px; font-size: 12px; }
 }
 
-/* ---------- Print / PDF ---------- */
+/* Respect "reduce motion": everything still works, nothing moves. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .char { transform: none; }
+  .reveal { opacity: 1; transform: none; }
+  .marquee-row { animation: none; }
+}
+
+/* ================================================================
+   Print / PDF — a clean, light, static résumé
+   ================================================================ */
 @page { size: A4; margin: 14mm 13mm; }
 @media print {
-  :root, :root[data-theme="dark"] {
-    --bg: #fff; --surface: #fff; --soft: #f3f3f1; --line: #dddcd6; --ink: #111; --body: #333; --muted: #6b6b70;
-    --accent: #2b45c4; --accent-soft: #eef0fd; --accent-ink: #2b45c4; --good: #11865a; --shadow: none; color-scheme: light;
+  :root, :root[data-theme="light"] {
+    --bg: #fff; --bg-2: #fff; --surface: #fff; --surface-2: #f3f3f1; --line: #dddcd6; --line-2: #cfcec8;
+    --ink: #111; --body: #333; --muted: #6b6b70; --accent: #2b45c4; --accent-2: #0e7490; --chip: #f3f3f1; --good: #11865a; --shadow: none;
+    color-scheme: light;
   }
   html { font-size: 10pt; }
-  body { font-size: 10pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .nav, .code, .no-print, .game:hover { display: none !important; }
+  body { font-size: 10pt; line-height: 1.5; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body::before, .cursor-glow, .progress, .nav, .hero-canvas, .hero::after, .terminal, .scroll-hint, .marquee, .hero-cta, .no-print, .mini-term, #status-panel, .toast { display: none !important; }
   .print-only { display: block; }
   .wrap { max-width: none; padding: 0; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .char { transform: none !important; animation: none !important; }
+  .grad-text { background: none; color: var(--accent); animation: none; }
+  .shot { transform: none !important; }
   section { padding: 14pt 0 4pt; }
-  .hero { padding: 0 0 6pt; }
+  .hero { min-height: 0; padding: 0 0 6pt; display: block; }
   .hero-grid { display: block; }
-  .hero h1 { font-size: 30pt; margin: 6pt 0 6pt; }
-  .lead { font-size: 11pt; max-width: none; }
-  .eyebrow { padding: 4pt 8pt; font-size: 8.5pt; }
+  .status-pill { display: none; }
+  .hero h1 { font-size: 32pt; margin: 0 0 6pt; }
+  .role-line { font-size: 13pt; margin-bottom: 4pt; }
+  .typer::after { display: none; }
+  .lead { font-size: 10.5pt; max-width: none; }
   .contact-chips { margin-top: 10pt; gap: 5pt; }
   .chip { padding: 4pt 8pt; font-size: 9pt; }
-  .section-head { margin-bottom: 10pt; display: block; }
-  .section-head h2 { font-size: 17pt; margin-top: 4pt; }
+  .section-head { margin-bottom: 10pt; display: block; break-after: avoid; }
+  .section-head h2 { font-size: 18pt; margin-top: 4pt; }
   .section-head p { font-size: 9pt; margin-top: 3pt; max-width: none; }
+  .kicker::before { display: none; }
   .work { gap: 8pt; }
-  .project { grid-template-columns: 34% 1fr; gap: 14pt; padding: 10pt; border-radius: 10pt; break-inside: avoid; }
-  .project:nth-child(even) .shot { order: 0; }
-  .project h3 { font-size: 14pt; margin: 5pt 0 2pt; }
+  .project { grid-template-columns: 34% 1fr; gap: 14pt; padding: 10pt; border-radius: 10pt; break-inside: avoid; background: #fff; }
+  .project:nth-child(even) .tilt-wrap { order: 0; }
+  .p-index { display: none; }
+  .project h3 { font-size: 15pt; margin: 4pt 0 2pt; }
   .project .sub { margin-bottom: 4pt; }
   .project p { margin-bottom: 6pt; font-size: 9.5pt; }
-  .tags { margin-bottom: 6pt; } .tags li { font-size: 8pt; padding: 2pt 6pt; }
-  .links .btn { height: auto; padding: 0; border: 0; background: none; font-size: 8.5pt; color: var(--accent); }
+  .tags { margin-bottom: 6pt; } .tags li { font-size: 7.5pt; padding: 2pt 5pt; }
+  .links .btn { height: auto; padding: 0; border: 0; background: none; font-size: 8.5pt; color: var(--accent); white-space: normal; }
   .links .btn svg { display: none; }
   .links .btn::after { content: " — " attr(data-url); color: var(--muted); }
-  .shot { border-radius: 6pt; }
+  .shot { border-radius: 6pt; box-shadow: none; }
+  .shot .glare { display: none; }
   .shot-bar { padding: 4pt 6pt; } .shot-bar span { font-size: 7pt; padding: 2pt 5pt; }
   .games { grid-template-columns: repeat(4, 1fr); gap: 7pt; }
   .game { padding: 9pt; border-radius: 10pt; break-inside: avoid; }
-  .game img { width: 40pt; height: 40pt; border-radius: 10pt; box-shadow: none; }
-  .game h3 { font-size: 10.5pt; margin: 6pt 0 3pt; }
+  .game-icon, .game-icon img { width: 40pt; height: 40pt; }
+  .game-icon img { border-radius: 10pt; box-shadow: none; animation: none; }
+  .game-icon::after { display: none; }
+  .game h3 { font-size: 11pt; margin: 6pt 0 3pt; }
   .game p { font-size: 8.5pt; margin-bottom: 6pt; }
   .game .foot { font-size: 8pt; }
   .publisher { font-size: 9pt; margin-top: 6pt; }
+  #games, #side, #oss, #skills { break-inside: avoid; }
+  .hero h1 .grad-text .char { background: none; color: var(--accent); }
   .side { grid-template-columns: repeat(3, 1fr); gap: 8pt; }
   .card { border-radius: 10pt; break-inside: avoid; }
-  .card-body { padding: 9pt; }
+  .card .tilt-wrap { padding: 6pt 6pt 0; }
+  .card-body { padding: 8pt 9pt 9pt; }
   .card h3 { font-size: 12.5pt; margin: 4pt 0 3pt; }
   .card p { font-size: 8.5pt; margin-bottom: 6pt; }
-  .oss, .skills { gap: 8pt; }
-  .oss-main, .skill { padding: 10pt; border-radius: 10pt; break-inside: avoid; }
-  .oss-main h3 { font-size: 13pt; }
-  .oss-main p { font-size: 9pt; }
-  .skills { grid-template-columns: repeat(3, 1fr); }
-  .skill.primary { box-shadow: none; }
-  .skill h3 { font-size: 10.5pt; } .skill .note { font-size: 8.5pt; margin-bottom: 6pt; }
-  .contact { display: none; }
-  footer { padding: 10pt 0 0; font-size: 8.5pt; }
-  /* Let sections flow; keep each heading with the content under it. */
-  .section-head { break-after: avoid; }
-  .links { gap: 2pt 10pt; }
-  /* Short sections stay on one page, so a heading never ends up alone at the bottom. */
-  #side, #oss, #skills { break-inside: avoid; }
-  /* Side cards: print just the live URL (no label, no Code link). */
   .card .links .btn + .btn { display: none; }
   .card .links .btn { font-size: 0; }
   .card .links .btn::after { content: attr(data-url); font-size: 8pt; overflow-wrap: anywhere; }
+  .split { display: block; }
+  .panel { padding: 10pt; border-radius: 10pt; break-inside: avoid; }
+  .panel h3 { font-size: 14pt; margin: 4pt 0 4pt; }
+  .panel p { font-size: 9pt; margin-bottom: 6pt; }
+  .skills { grid-template-columns: repeat(3, 1fr); gap: 8pt; }
+  .skill { padding: 10pt; border-radius: 10pt; break-inside: avoid; }
+  .skill.primary { background: #fff; border-color: var(--accent); }
+  .skill-ico { display: none; }
+  .skill h3 { font-size: 11pt; } .skill .note { font-size: 8.5pt; margin-bottom: 6pt; }
+  .badge { color: #fff; background: var(--accent); }
+  #contact { display: none; }
+  footer { padding: 10pt 0 0; font-size: 8.5pt; }
   a { text-decoration: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- Icons, reused below with <use href="#..."> -->
+<!-- Icons, reused with <use href="#..."> -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
@@ -318,11 +521,18 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 3.2v17.6c0 .5.5.8.9.6L20 13.1c.5-.3.5-.9 0-1.2L5.4 2.6c-.4-.2-.9.1-.9.6z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-layout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 20V9"/></symbol>
 </svg>
 
+<div class="progress" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="toast" role="status" aria-live="polite"></div>
+
 <nav class="nav">
-  <div class="wrap">
+  <div class="nav-inner">
     <a class="logo" href="#top"><span class="logo-mark">AA</span> Alireza Ahmadi</a>
     <div class="nav-links">
       <a href="#work">Work</a>
@@ -333,130 +543,198 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       <a href="#contact">Contact</a>
     </div>
     <div class="nav-actions">
-      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode"><svg><use href="#i-moon"/></svg></button>
-      <a class="btn btn-primary" href="Alireza-Ahmadi-Portfolio.pdf" download><svg><use href="#i-download"/></svg><span class="btn-label">Résumé PDF</span></a>
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle light mode"><svg><use href="#i-sun"/></svg></button>
+      <a class="btn btn-primary magnetic" href="Alireza-Ahmadi-Portfolio.pdf" download><svg><use href="#i-download"/></svg><span class="btn-label">Résumé PDF</span></a>
     </div>
   </div>
 </nav>
 
 <header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow"><span class="dot"></span>Backend Developer · .NET</span>
-      <h1>Alireza<br><em>Ahmadi</em></h1>
-      <p class="lead">
-        I'm a developer focused on the backend, mostly in C# and .NET. I've worked on travel-booking platforms,
-        a self-hosted customer-engagement platform, a fintech panel and multiplayer mobile games — and I ship
-        odd little web experiments on the side.
-      </p>
-      <div class="contact-chips">
-        <a class="chip" href="mailto:ahmadialireza317@gmail.com"><svg><use href="#i-mail"/></svg>ahmadialireza317@gmail.com</a>
-        <a class="chip" href="tel:+989104965374"><svg><use href="#i-phone"/></svg>+98 910 496 5374</a>
-        <a class="chip" href="https://github.com/AwlirezaZ"><svg><use href="#i-github"/></svg>github.com/AwlirezaZ</a>
-        <span class="chip"><svg><use href="#i-pin"/></svg>Tehran, Iran</span>
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="status-pill"><span class="pulse"></span>online · Tehran · <span id="clock">--:--</span> local</span>
+        <h1 aria-label="Alireza Ahmadi">
+          <span class="line" data-split>Alireza</span>
+          <span class="line grad-text" data-split>Ahmadi</span>
+        </h1>
+        <p class="role-line">Backend developer who builds<br><span class="typer" id="typer">reliable APIs</span></p>
+        <p class="lead">
+          I'm a developer focused on the backend, mostly in C# and .NET. I've worked on travel-booking platforms,
+          a self-hosted customer-engagement platform, a fintech panel and multiplayer mobile games — and I ship
+          odd little web experiments on the side.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary magnetic" href="#work">See my work <svg class="arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn magnetic" href="#contact">Get in touch</a>
+        </div>
+        <div class="contact-chips">
+          <button class="chip copy-email" type="button"><svg><use href="#i-mail"/></svg>ahmadialireza317@gmail.com</button>
+          <a class="chip" href="tel:+989104965374"><svg><use href="#i-phone"/></svg>+98 910 496 5374</a>
+          <a class="chip" href="https://github.com/AwlirezaZ"><svg><use href="#i-github"/></svg>github.com/AwlirezaZ</a>
+          <span class="chip"><svg><use href="#i-pin"/></svg>Tehran, Iran</span>
+        </div>
+      </div>
+
+      <div class="terminal" aria-label="A playful server log that reacts as you browse the page">
+        <div class="term-bar"><i></i><i></i><i></i><span>alireza@portfolio: ~/Portfolio.Api</span><span class="live"><b></b>LIVE</span></div>
+        <div class="term-body" id="term"></div>
       </div>
     </div>
-    <div class="code" aria-hidden="true">
-      <div class="code-bar"><i></i><i></i><i></i><span>Developer.cs</span></div>
-<pre><span class="k">var</span> alireza = <span class="k">new</span> <span class="t">Developer</span>
-{
-    Name   = <span class="s">"Alireza Ahmadi"</span>,
-    Focus  = <span class="t">Focus</span>.<span class="p">Backend</span>,
-    Stack  = [<span class="s">".NET"</span>, <span class="s">"C#"</span>, <span class="s">"ASP.NET Core"</span>],
-    Ships  = [<span class="s">"web"</span>, <span class="s">"games"</span>, <span class="s">"tools"</span>],
-    Based  = <span class="s">"Tehran, Iran"</span>
-};
-
-<span class="k">await</span> alireza.<span class="p">BuildAsync</span>(<span class="s">"something good"</span>);
-<span class="c">// ✓ Build succeeded · 0 warnings</span></pre>
-    </div>
   </div>
+  <a class="scroll-hint" href="#stack" aria-label="Scroll down"><i></i>scroll</a>
 </header>
+
+<div class="marquee" id="stack" aria-label="Technologies I work with">
+  <div class="marquee-row"></div>
+  <div class="marquee-row"></div>
+</div>
 
 <main>
 
 <section id="work">
   <div class="wrap">
-    <div class="section-head">
-      <div><div class="kicker">01 · Selected work</div><h2>Products I've worked on</h2></div>
-      <p>Platforms in production: customer messaging, flight and tour booking, and a back-office tool where the numbers have to be right.</p>
+    <div class="section-head reveal">
+      <div><div class="kicker">01 · Selected work</div><h2 data-scramble>Products I've worked on</h2></div>
+      <p>Platforms in production: customer messaging, flight and tour booking, vehicle tracking, and a back-office tool where the numbers have to be right.</p>
     </div>
 
     <div class="work">
-      <article class="project">
-        <div class="shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>ecrm.papgroup.ir</span></div>
-          <img src="assets/upliftdone.jpg" alt="UpliftDone landing page" width="1200" height="750" loading="lazy">
+      <article class="project spot reveal">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>ecrm.papgroup.ir</span></div>
+            <img src="assets/upliftdone.jpg" alt="UpliftDone landing page" width="1200" height="750" loading="lazy">
+            <span class="glare"></span>
+          </div>
         </div>
         <div>
-          <div class="meta"><span class="role">● Role: Developer</span><span>·</span><span>PAP Group</span></div>
+          <div class="p-index"><b>01</b> / 06</div>
           <h3>UpliftDone</h3>
-          <p class="sub">Self-hosted customer-engagement platform</p>
+          <div class="meta"><span class="role">● Role: Developer</span><span>·</span><span>PAP Group</span></div>
+          <p class="sub" style="margin-top:12px">Self-hosted customer-engagement platform</p>
           <p>
-            Events from web, mobile and server SDKs stream into a single customer profile. Audience segments
-            recompute live as events arrive, and campaigns and drag-and-drop journeys reach customers over
-            email, SMS, WhatsApp and web push — with A/B tests, control groups, frequency caps, quiet hours
-            and per-link attribution.
+            Events from web, mobile and server SDKs stream into a single customer profile. Audience segments recompute
+            live as events arrive, and campaigns and drag-and-drop journeys reach customers over email, SMS, WhatsApp and
+            web push — with A/B tests, control groups, frequency caps, quiet hours and per-link attribution.
           </p>
           <ul class="tags"><li>Event streaming</li><li>Live segmentation</li><li>Multi-channel messaging</li><li>Analytics</li></ul>
-          <div class="links"><a class="btn" href="https://ecrm.papgroup.ir/" data-url="ecrm.papgroup.ir">Visit site <svg><use href="#i-arrow"/></svg></a></div>
+          <div class="links"><a class="btn magnetic" href="https://ecrm.papgroup.ir/" data-url="ecrm.papgroup.ir">Visit site <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
         </div>
       </article>
 
-      <article class="project">
-        <div class="shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>trip.ir</span></div>
-          <img src="assets/trip.jpg" alt="Trip.ir flight search page" width="1200" height="750" loading="lazy">
+      <article class="project spot reveal">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>trip.ir</span></div>
+            <img src="assets/trip.jpg" alt="Trip.ir flight search page" width="1200" height="750" loading="lazy">
+            <span class="glare"></span>
+          </div>
         </div>
         <div>
-          <div class="meta"><span class="role">● Role: Developer</span></div>
+          <div class="p-index"><b>02</b> / 06</div>
           <h3>Trip.ir</h3>
-          <p class="sub">Online flight-booking platform</p>
+          <div class="meta"><span class="role">● Role: Developer</span></div>
+          <p class="sub" style="margin-top:12px">Online flight-booking platform</p>
           <p>
-            Domestic and international flight tickets from scheduled and charter airlines, plus hotel booking,
-            tours and travel insurance. Available on the web and as installable Android and iOS apps, with online
-            refunds and 24-hour support.
+            Domestic and international flight tickets from scheduled and charter airlines, plus hotel booking, tours and
+            travel insurance. Available on the web and as installable Android and iOS apps, with online refunds and
+            24-hour support.
           </p>
           <ul class="tags"><li>Travel</li><li>Booking engine</li><li>Payments</li><li>Mobile web app</li></ul>
-          <div class="links"><a class="btn" href="https://trip.ir/" data-url="trip.ir">Visit site <svg><use href="#i-arrow"/></svg></a></div>
+          <div class="links"><a class="btn magnetic" href="https://trip.ir/" data-url="trip.ir">Visit site <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
         </div>
       </article>
 
-      <article class="project">
-        <div class="shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>alefbatour.com</span></div>
-          <img src="assets/alefbatour.jpg" alt="Alefba Safar travel agency home page" width="1200" height="763" loading="lazy">
+      <article class="project spot reveal">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>alefbatour.com</span></div>
+            <img src="assets/alefbatour.jpg" alt="Alefba Safar travel agency home page" width="1200" height="763" loading="lazy">
+            <span class="glare"></span>
+          </div>
         </div>
         <div>
-          <div class="meta"><span class="role">● Role: Developer</span></div>
+          <div class="p-index"><b>03</b> / 06</div>
           <h3>Alefba Safar</h3>
-          <p class="sub">Travel-agency website · alefbatour.com</p>
+          <div class="meta"><span class="role">● Role: Developer</span></div>
+          <p class="sub" style="margin-top:12px">Travel-agency website · alefbatour.com</p>
           <p>
             Website for an Isfahan-based travel agency: domestic and international tour packages, hotel and flight
             booking, visa guides for dozens of countries, charter and seasonal tours, and a travel blog.
           </p>
-          <ul class="tags"><li>Travel</li><li>Tours & visas</li><li>Content & SEO</li></ul>
-          <div class="links"><a class="btn" href="https://alefbatour.com/" data-url="alefbatour.com">Visit site <svg><use href="#i-arrow"/></svg></a></div>
+          <ul class="tags"><li>Travel</li><li>Tours &amp; visas</li><li>Content &amp; SEO</li></ul>
+          <div class="links"><a class="btn magnetic" href="https://alefbatour.com/" data-url="alefbatour.com">Visit site <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
         </div>
       </article>
 
-      <article class="project">
-        <div class="shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>zarsood.gandomgolds.com</span></div>
-          <img src="assets/zarsood.jpg" alt="Zarsood dashboard with profit calculation, shareholders and daily assets modules" width="1200" height="506" loading="lazy">
+      <article class="project spot reveal">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>zarsood.gandomgolds.com</span></div>
+            <img src="assets/zarsood.jpg" alt="Zarsood dashboard with profit calculation, shareholders and daily assets modules" width="1200" height="506" loading="lazy">
+            <span class="glare"></span>
+          </div>
         </div>
         <div>
-          <div class="meta"><span class="role">● Role: Developer</span><span>·</span><span>Internal panel</span></div>
+          <div class="p-index"><b>04</b> / 06</div>
           <h3>Zarsood</h3>
-          <p class="sub">Gold-profit distribution system</p>
+          <div class="meta"><span class="role">● Role: Developer</span><span>·</span><span>Internal panel</span></div>
+          <p class="sub" style="margin-top:12px">Gold-profit distribution system</p>
           <p>
-            A back-office panel that splits a gold company's daily profit between its shareholders. The manager
-            records the day's profit or pulls the company's daily assets, and every shareholder's share is calculated
-            and listed with date filters. Automatic profit calculation and syncing back to the company system are
-            in progress.
+            A back-office panel that splits a gold company's daily profit between its shareholders. The manager records
+            the day's profit or pulls the company's daily assets, and every shareholder's share is calculated and listed
+            with date filters. Automatic profit calculation and syncing back to the company system are in progress.
           </p>
           <ul class="tags"><li>Fintech</li><li>Back office</li><li>Shareholder accounting</li></ul>
-          <div class="links"><a class="btn" href="http://zarsood.gandomgolds.com" data-url="zarsood.gandomgolds.com">Visit site <svg><use href="#i-arrow"/></svg></a></div>
+          <div class="links"><a class="btn magnetic" href="http://zarsood.gandomgolds.com" data-url="zarsood.gandomgolds.com">Visit site <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="project spot reveal">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>wizerco.com</span></div>
+            <img src="assets/wizer.jpg" alt="Wizer GPS tracker home page" width="800" height="502" loading="lazy">
+            <span class="glare"></span>
+          </div>
+        </div>
+        <div>
+          <div class="p-index"><b>05</b> / 06</div>
+          <h3>Wizer</h3>
+          <div class="meta"><span class="role">● Role: Developer</span></div>
+          <p class="sub" style="margin-top:12px">GPS trackers for cars &amp; motorcycles · wizerco.com</p>
+          <p>
+            Website and online store for Wizer, a vehicle-security brand with 270,000+ users and 190+ dealers across
+            Iran: the tracker catalogue, subscription and warranty renewal, a dealer locator, and the way into the Wizer
+            tracking app on Android, iOS and the web — live location, movement and speed alerts, and remote engine cut-off.
+          </p>
+          <ul class="tags"><li>IoT / GPS tracking</li><li>E-commerce</li><li>Subscriptions</li><li>Dealer network</li></ul>
+          <div class="links"><a class="btn magnetic" href="https://www.wizerco.com/" data-url="wizerco.com">Visit site <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="project spot reveal">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>mehrparvaz.com</span></div>
+            <img src="assets/mehrparvaz.jpg" alt="Mehr Parvaz travel agency home page" width="1200" height="763" loading="lazy">
+            <span class="glare"></span>
+          </div>
+        </div>
+        <div>
+          <div class="p-index"><b>06</b> / 06</div>
+          <h3>Mehr Parvaz</h3>
+          <div class="meta"><span class="role">● Role: Developer</span></div>
+          <p class="sub" style="margin-top:12px">Travel agency &amp; tour operator · mehrparvaz.com</p>
+          <p>
+            Website for a travel agency that runs its own international tours — Turkey, Thailand, Malaysia, China,
+            Europe and dozens more — with tour search, last-minute deals, pay-in-instalments tours, cruises, visas,
+            online flight tickets and hotel booking, and a travel magazine.
+          </p>
+          <ul class="tags"><li>Travel</li><li>Tour booking</li><li>Instalment payments</li><li>Hotels &amp; flights</li></ul>
+          <div class="links"><a class="btn magnetic" href="https://mehrparvaz.com/" data-url="mehrparvaz.com">Visit site <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
         </div>
       </article>
     </div>
@@ -465,88 +743,97 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 <section id="games">
   <div class="wrap">
-    <div class="section-head">
-      <div><div class="kicker">02 · Games</div><h2>Live on Google Play</h2></div>
-      <p>Online multiplayer card, board and strategy games, with 26K+ downloads between them.</p>
+    <div class="section-head reveal">
+      <div><div class="kicker">02 · Games</div><h2 data-scramble>Live on Google Play</h2></div>
+      <p>Online multiplayer card, board and strategy games, with <b class="count" data-to="26">26</b>K+ downloads between them.</p>
     </div>
     <div class="games">
-      <a class="game" href="https://play.google.com/store/apps/details?id=com.funcogames.hokm">
-        <img src="assets/icon-hokm.png" alt="" width="76" height="76" loading="lazy">
+      <a class="game spot reveal" style="--d:0" href="https://play.google.com/store/apps/details?id=com.funcogames.hokm">
+        <div class="game-icon"><img src="assets/icon-hokm.png" alt="" width="84" height="84" loading="lazy"></div>
         <h3>Hokm Chi</h3>
         <p>Online team card game. Live matches against real players, in-game chat and leaderboards.</p>
-        <div class="foot"><span class="downloads">10K+ downloads</span><span>Card</span></div>
+        <div class="foot"><span class="downloads"><b class="count" data-to="10">10</b>K+ downloads</span><span>Card</span></div>
       </a>
-      <a class="game" href="https://play.google.com/store/apps/details?id=com.funcogames.backgammon">
-        <img src="assets/icon-joft6.png" alt="" width="76" height="76" loading="lazy">
+      <a class="game spot reveal" style="--d:1" href="https://play.google.com/store/apps/details?id=com.funcogames.backgammon">
+        <div class="game-icon"><img src="assets/icon-joft6.png" alt="" width="84" height="84" loading="lazy"></div>
         <h3>Joft 6</h3>
         <p>A modern mobile take on backgammon — the classic strategy board game, easy to learn, deep to master.</p>
-        <div class="foot"><span class="downloads">10K+ downloads</span><span>Board</span></div>
+        <div class="foot"><span class="downloads"><b class="count" data-to="10">10</b>K+ downloads</span><span>Board</span></div>
       </a>
-      <a class="game" href="https://play.google.com/store/apps/details?id=com.supersquad.spincoingamemaster">
-        <img src="assets/icon-shahdozd.png" alt="" width="76" height="76" loading="lazy">
+      <a class="game spot reveal" style="--d:2" href="https://play.google.com/store/apps/details?id=com.supersquad.spincoingamemaster">
+        <div class="game-icon"><img src="assets/icon-shahdozd.png" alt="" width="84" height="84" loading="lazy"></div>
         <h3>ShahDozd</h3>
         <p>Online strategy game: build a kingdom, manage resources, upgrade buildings, collect cards and raid rivals.</p>
-        <div class="foot"><span class="downloads">5K+ downloads</span><span>Strategy</span></div>
+        <div class="foot"><span class="downloads"><b class="count" data-to="5">5</b>K+ downloads</span><span>Strategy</span></div>
       </a>
-      <a class="game" href="https://play.google.com/store/apps/details?id=com.funcogames.shelem">
-        <img src="assets/icon-shelem.png" alt="" width="76" height="76" loading="lazy">
+      <a class="game spot reveal" style="--d:3" href="https://play.google.com/store/apps/details?id=com.funcogames.shelem">
+        <div class="game-icon"><img src="assets/icon-shelem.png" alt="" width="84" height="84" loading="lazy"></div>
         <h3>Shelem Chi</h3>
         <p>Online team card game. Find a teammate, read the table and win the hand against real players.</p>
-        <div class="foot"><span class="downloads">1K+ downloads</span><span>Card</span></div>
+        <div class="foot"><span class="downloads"><b class="count" data-to="1">1</b>K+ downloads</span><span>Card</span></div>
       </a>
     </div>
-    <p class="publisher">Published by <b>Playberry Games</b> · Role: Developer · Download counts from Google Play, November 2026.</p>
+    <p class="publisher reveal">Published by <b>Playberry Games</b> · Role: Developer · Download counts from Google Play, November 2026.</p>
   </div>
 </section>
 
 <section id="side">
   <div class="wrap">
-    <div class="section-head">
-      <div><div class="kicker">03 · Side projects</div><h2>Things I built for fun</h2></div>
-      <p>Small, polished experiments — each one runs entirely in the browser.</p>
+    <div class="section-head reveal">
+      <div><div class="kicker">03 · Side projects</div><h2 data-scramble>Things I built for fun</h2></div>
+      <p>Small, polished experiments — each one runs entirely in the browser. Go on, click them.</p>
     </div>
     <div class="side">
-      <article class="card">
-        <div class="shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/qafiyeh-baz</span></div>
-          <img src="assets/qafiyeh.jpg" alt="Qafiyeh-Baz start screen" width="1200" height="750" loading="lazy">
+      <article class="card spot reveal" style="--d:0">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/qafiyeh-baz</span></div>
+            <img src="assets/qafiyeh.jpg" alt="Qafiyeh-Baz start screen" width="1200" height="750" loading="lazy">
+            <span class="glare"></span>
+          </div>
         </div>
         <div class="card-body">
           <div class="meta"><span>JavaScript · Web Audio · PWA</span></div>
           <h3>Qafiyeh-Baz</h3>
           <p>A Persian freestyle-rap trainer. A beat plays, a ball bounces on a 4-beat grid, and you land a rhyme on the fourth. Daily challenges, your own beats with BPM detection, and 9:16 video recording — no backend, works offline.</p>
           <div class="links">
-            <a class="btn" href="https://awlirezaz.github.io/qafiyeh-baz/" data-url="awlirezaz.github.io/qafiyeh-baz">Play <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn magnetic" href="https://awlirezaz.github.io/qafiyeh-baz/" data-url="awlirezaz.github.io/qafiyeh-baz">Play <svg class="arrow"><use href="#i-arrow"/></svg></a>
             <a class="btn" href="https://github.com/AwlirezaZ/qafiyeh-baz" data-url="github.com/AwlirezaZ/qafiyeh-baz"><svg><use href="#i-code"/></svg>Code</a>
           </div>
         </div>
       </article>
-      <article class="card">
-        <div class="shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/PartyLine85</span></div>
-          <img src="assets/partyline.jpg" alt="Party Line '85 neon city" width="1200" height="750" loading="lazy">
+      <article class="card spot reveal" style="--d:1">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/PartyLine85</span></div>
+            <img src="assets/partyline.jpg" alt="Party Line '85 neon city" width="1200" height="750" loading="lazy">
+            <span class="glare"></span>
+          </div>
         </div>
         <div class="card-body">
           <div class="meta"><span>WebGL2 · Web Audio · no libraries</span></div>
           <h3>Party Line '85</h3>
           <p>An interactive retro-futuristic art world: a neon city drawn by one unbroken beam of light. Touch any line and it plucks like a string. Raw WebGL2 and Web Audio in a single HTML file.</p>
           <div class="links">
-            <a class="btn" href="https://awlirezaz.github.io/PartyLine85/" data-url="awlirezaz.github.io/PartyLine85">Open <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn magnetic" href="https://awlirezaz.github.io/PartyLine85/" data-url="awlirezaz.github.io/PartyLine85">Open <svg class="arrow"><use href="#i-arrow"/></svg></a>
             <a class="btn" href="https://github.com/AwlirezaZ/PartyLine85" data-url="github.com/AwlirezaZ/PartyLine85"><svg><use href="#i-code"/></svg>Code</a>
           </div>
         </div>
       </article>
-      <article class="card">
-        <div class="shot">
-          <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/100IndicaFakeShop</span></div>
-          <img src="assets/indica.jpg" alt="100Indica Shop home page" width="800" height="505" loading="lazy">
+      <article class="card spot reveal" style="--d:2">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/100IndicaFakeShop</span></div>
+            <img src="assets/indica.jpg" alt="100Indica Shop home page" width="800" height="505" loading="lazy">
+            <span class="glare"></span>
+          </div>
         </div>
         <div class="card-body">
           <div class="meta"><span>React · TypeScript · Tailwind</span></div>
           <h3>100Indica Shop</h3>
           <p>A parody online store with ~10,000 real products from open-data APIs and a fully simulated checkout — plus a rigged prize wheel, a courier who gets lost, and achievements.</p>
           <div class="links">
-            <a class="btn" href="https://awlirezaz.github.io/100IndicaFakeShop/" data-url="awlirezaz.github.io/100IndicaFakeShop">Shop <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn magnetic" href="https://awlirezaz.github.io/100IndicaFakeShop/" data-url="awlirezaz.github.io/100IndicaFakeShop">Shop <svg class="arrow"><use href="#i-arrow"/></svg></a>
             <a class="btn" href="https://github.com/AwlirezaZ/100IndicaFakeShop" data-url="github.com/AwlirezaZ/100IndicaFakeShop"><svg><use href="#i-code"/></svg>Code</a>
           </div>
         </div>
@@ -557,19 +844,28 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 <section id="oss">
   <div class="wrap">
-    <div class="section-head">
-      <div><div class="kicker">04 · Open source</div><h2>On GitHub</h2></div>
-      <p>A small tool that people actually use.</p>
+    <div class="section-head reveal">
+      <div><div class="kicker">04 · Open source &amp; uptime</div><h2 data-scramble>Running in production</h2></div>
+      <p>A small tool people actually use — and a live health check of my public projects, measured from your browser right now.</p>
     </div>
-    <div class="oss">
-      <div class="oss-main">
-        <div class="meta"><span>PowerShell · Bash · Windows & Linux</span></div>
+    <div class="split">
+      <div class="panel spot reveal">
+        <div class="meta"><span>PowerShell · Bash · Windows &amp; Linux</span></div>
         <h3>DNSify <span class="star">★ 28</span></h3>
+        <div class="mini-term" id="dnsify" aria-hidden="true"></div>
         <p>
-          A small cross-platform tool that finds a working DNS server to reach Spotify in regions where it's
-          restricted, checks connectivity automatically, and restores your original DNS settings on exit.
+          A small cross-platform tool that finds a working DNS server to reach Spotify in regions where it's restricted,
+          checks connectivity automatically, and restores your original DNS settings on exit.
         </p>
-        <div class="links"><a class="btn" href="https://github.com/AwlirezaZ/DNSify" data-url="github.com/AwlirezaZ/DNSify"><svg><use href="#i-code"/></svg>View on GitHub</a></div>
+        <div class="links"><a class="btn magnetic" href="https://github.com/AwlirezaZ/DNSify" data-url="github.com/AwlirezaZ/DNSify"><svg><use href="#i-code"/></svg>View on GitHub</a></div>
+      </div>
+      <div class="panel spot reveal" id="status-panel" style="--d:1">
+        <div class="status-head">
+          <h3>System status</h3>
+          <span class="all-ok" id="all-ok"><span class="pulse"></span>checking…</span>
+        </div>
+        <p class="status-note">Real round-trip times from your browser to each live project.</p>
+        <ul class="status-list" id="status-list"></ul>
       </div>
     </div>
   </div>
@@ -577,41 +873,45 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 <section id="skills">
   <div class="wrap">
-    <div class="section-head">
-      <div><div class="kicker">05 · Skills</div><h2>What I work with</h2></div>
+    <div class="section-head reveal">
+      <div><div class="kicker">05 · Skills</div><h2 data-scramble>What I work with</h2></div>
       <p>Backend first — with enough frontend and DevOps to ship a whole product.</p>
     </div>
     <div class="skills">
-      <div class="skill primary">
+      <div class="skill primary spot reveal" style="--d:0">
+        <div class="skill-ico"><svg><use href="#i-server"/></svg></div>
         <h3>Backend <span class="badge">Main</span></h3>
         <p class="note">Where I spend most of my time.</p>
         <ul class="tags"><li>C#</li><li>.NET</li><li>ASP.NET Core</li><li>Web APIs</li><li>gRPC</li><li>GraphQL</li><li>ASP.NET Identity</li></ul>
       </div>
-      <div class="skill">
-        <h3>DevOps & tooling</h3>
+      <div class="skill spot reveal" style="--d:1">
+        <div class="skill-ico"><svg><use href="#i-gear"/></svg></div>
+        <h3>DevOps &amp; tooling</h3>
         <p class="note">Getting code built, shipped and observed.</p>
-        <ul class="tags"><li>Docker</li><li>CI/CD</li><li>GitHub Actions</li><li>Git</li><li>Linux</li><li>Shell & PowerShell</li></ul>
+        <ul class="tags"><li>Docker</li><li>CI/CD</li><li>GitHub Actions</li><li>Git</li><li>Linux</li><li>Shell &amp; PowerShell</li></ul>
       </div>
-      <div class="skill">
+      <div class="skill spot reveal" style="--d:2">
+        <div class="skill-ico"><svg><use href="#i-layout"/></svg></div>
         <h3>Frontend</h3>
         <p class="note">Enough to build the whole thing end to end.</p>
-        <ul class="tags"><li>JavaScript</li><li>TypeScript</li><li>Vue / Nuxt</li><li>React</li><li>HTML & CSS</li><li>Web Audio / WebGL</li></ul>
+        <ul class="tags"><li>JavaScript</li><li>TypeScript</li><li>Vue / Nuxt</li><li>React</li><li>HTML &amp; CSS</li><li>Web Audio / WebGL</li></ul>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact" class="no-print">
+<section id="contact">
   <div class="wrap">
-    <div class="contact">
+    <div class="contact-card reveal">
       <div>
-        <h2>Let's build something good.</h2>
+        <div class="kicker">06 · Contact</div>
+        <h2 style="margin-top:18px"><span data-scramble>Let's build</span><br><span class="grad-text">something good.</span></h2>
         <p>Have a backend that needs building, or a product that needs another developer? I'd love to hear about it.</p>
       </div>
       <div class="contact-list">
-        <a href="mailto:ahmadialireza317@gmail.com"><svg><use href="#i-mail"/></svg>ahmadialireza317@gmail.com</a>
-        <a href="tel:+989104965374"><svg><use href="#i-phone"/></svg>+98 910 496 5374</a>
-        <a href="https://github.com/AwlirezaZ"><svg><use href="#i-github"/></svg>github.com/AwlirezaZ</a>
+        <button type="button" class="copy-email magnetic"><svg><use href="#i-mail"/></svg>ahmadialireza317@gmail.com<span class="hint">click to copy</span></button>
+        <a class="magnetic" href="tel:+989104965374"><svg><use href="#i-phone"/></svg>+98 910 496 5374<span class="hint">call</span></a>
+        <a class="magnetic" href="https://github.com/AwlirezaZ"><svg><use href="#i-github"/></svg>github.com/AwlirezaZ<span class="hint">↗</span></a>
       </div>
     </div>
   </div>
@@ -622,24 +922,426 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Alireza Ahmadi</span>
-    <span class="no-print">Hand-built in plain HTML & CSS · <a href="https://github.com/AwlirezaZ/AwlirezaZ.github.io">Source</a></span>
+    <span class="mono no-print">uptime <span id="uptime">00:00</span> · hand-built in plain HTML, CSS &amp; JS · <a href="https://github.com/AwlirezaZ/AwlirezaZ.github.io">source</a></span>
     <span class="print-only">Live portfolio: awlirezaz.github.io</span>
   </div>
 </footer>
 
 <script>
-  // Dark-mode toggle (remembers the choice; otherwise follows the system setting).
+(() => {
+  const $ = (s, el = document) => el.querySelector(s)
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)]
   const root = document.documentElement
-  const btn = document.getElementById('theme')
-  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
-  const syncIcon = () => btn.querySelector('use').setAttribute('href', isDark() ? '#i-sun' : '#i-moon')
-  btn.addEventListener('click', () => {
-    root.dataset.theme = isDark() ? 'light' : 'dark'
-    try { localStorage.setItem('theme', root.dataset.theme) } catch (e) {}
-    syncIcon()
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+  const css = (name) => getComputedStyle(root).getPropertyValue(name).trim()
+
+  /* ---------- Theme toggle (dark default) ---------- */
+  const themeBtn = $('#theme')
+  const syncTheme = () => {
+    const light = root.dataset.theme === 'light'
+    themeBtn.querySelector('use').setAttribute('href', light ? '#i-moon' : '#i-sun')
+    themeBtn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode')
+  }
+  themeBtn.addEventListener('click', () => {
+    if (root.dataset.theme === 'light') delete root.dataset.theme
+    else root.dataset.theme = 'light'
+    try { localStorage.setItem('theme', root.dataset.theme || 'dark') } catch (e) {}
+    syncTheme()
+    log(`<span class="t-acc">PATCH</span> /settings/theme <span class="t-ok">→ 204</span> <span class="t-dim">(${root.dataset.theme || 'dark'})</span>`)
   })
-  syncIcon()
-  document.getElementById('year').textContent = new Date().getFullYear()
+  syncTheme()
+
+  /* ---------- Local Tehran clock + uptime ---------- */
+  const clock = $('#clock')
+  const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tehran' })
+  const start = Date.now()
+  const tick = () => {
+    clock.textContent = fmt.format(new Date())
+    const s = Math.floor((Date.now() - start) / 1000)
+    $('#uptime').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
+  }
+  tick(); setInterval(tick, 1000)
+  $('#year').textContent = new Date().getFullYear()
+
+  /* ---------- Split hero name into letters for the staggered reveal ---------- */
+  let n = 0
+  $$('[data-split]').forEach((el) => {
+    const text = el.textContent.trim()
+    el.textContent = ''
+    for (const ch of text) {
+      const s = document.createElement('span')
+      s.className = 'char'; s.style.setProperty('--i', n++); s.textContent = ch
+      s.setAttribute('aria-hidden', 'true')
+      el.appendChild(s)
+    }
+  })
+  // Give each letter of the gradient line its slice of the gradient (see .grad-text .char in CSS).
+  const sliceGradient = () => $$('.hero h1 .grad-text').forEach((line) => {
+    const chars = $$('.char', line), first = chars[0]
+    if (!first) return
+    const width = chars.reduce((w, c) => Math.max(w, c.offsetLeft + c.offsetWidth), 0) - first.offsetLeft
+    chars.forEach((c) => { c.style.setProperty('--lw', width + 'px'); c.style.setProperty('--cx', c.offsetLeft - first.offsetLeft + 'px') })
+  })
+  sliceGradient()
+  document.fonts?.ready.then(sliceGradient)
+  addEventListener('resize', sliceGradient)
+
+  /* ---------- Rotating role typer ---------- */
+  const typer = $('#typer')
+  const roles = ['reliable APIs', 'booking engines', 'messaging platforms', 'fintech back offices', 'multiplayer games', 'weird web toys']
+  ;(async () => {
+    if (reduceMotion) return
+    await sleep(1600)
+    for (let i = 1; ; i = (i + 1) % roles.length) {
+      await sleep(1900)
+      for (let t = typer.textContent; t.length; t = t.slice(0, -1)) { typer.textContent = t; await sleep(28) }
+      typer.textContent = ''
+      for (const ch of roles[i]) { typer.textContent += ch; await sleep(55) }
+    }
+  })()
+
+  /* ---------- The "server" terminal ---------- */
+  const term = $('#term')
+  const MAX_LINES = 18
+  function log(html) {
+    const ln = document.createElement('div')
+    ln.className = 'ln'; ln.innerHTML = html
+    term.appendChild(ln)
+    while (term.children.length > MAX_LINES) term.firstChild.remove()
+  }
+  const ms = () => 4 + Math.floor(Math.random() * 18)
+  let booted = false
+  ;(async () => {
+    const prompt = '<span class="t-prompt">❯</span> '
+    const cmd = 'dotnet run --project Portfolio.Api'
+    if (reduceMotion) {
+      log(prompt + `<span class="t-cmd">${cmd}</span>`)
+    } else {
+      await sleep(700)
+      const line = document.createElement('div'); line.className = 'ln'; term.appendChild(line)
+      for (let i = 0; i <= cmd.length; i++) { line.innerHTML = prompt + `<span class="t-cmd">${cmd.slice(0, i)}</span><span class="caret"></span>`; await sleep(38 + Math.random() * 40) }
+      line.innerHTML = prompt + `<span class="t-cmd">${cmd}</span>`
+      await sleep(350)
+    }
+    const boot = [
+      '<span class="t-dim">  Determining projects to restore…</span>',
+      '<span class="t-dim">  Building…</span> <span class="t-ok">Build succeeded.</span> <span class="t-dim">0 warnings · 0 errors</span>',
+      '<span class="t-info">info</span>: Microsoft.Hosting.Lifetime[14]',
+      '      Now listening on: <span class="t-url">https://awlirezaz.github.io</span>',
+      '<span class="t-info">info</span>: Microsoft.Hosting.Lifetime[0]',
+      '      Application started. Hosting environment: <span class="t-acc">Production</span>',
+      `<span class="t-info">info</span>: Request <span class="t-acc">GET</span> / <span class="t-ok">→ 200 OK</span> <span class="t-dim">${ms()} ms</span>`,
+    ]
+    for (const l of boot) { log(l); if (!reduceMotion) await sleep(260) }
+    booted = true
+  })()
+
+  // Log a "request" whenever a section scrolls into view…
+  const routes = { work: '/work', games: '/games', side: '/side-projects', oss: '/open-source', skills: '/skills', contact: '/contact' }
+  const seenRoutes = new Set()
+  // …and whenever a link is clicked.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]')
+    if (!a || !booted) return
+    const href = a.getAttribute('href')
+    if (href.startsWith('#')) return
+    const url = href.replace(/^https?:\/\//, '').replace(/\/$/, '')
+    log(`<span class="t-acc">GET</span> ${url.length > 34 ? url.slice(0, 33) + '…' : url} <span class="t-warn">→ 302 redirect</span> <span class="t-dim">bye 👋</span>`)
+  })
+
+  /* ---------- Hero network canvas: services exchanging requests ---------- */
+  const canvas = $('.hero-canvas')
+  const ctx = canvas.getContext('2d')
+  let W = 0, H = 0, DPR = 1, nodes = [], packets = [], mouse = null, heroVisible = true, raf = 0
+  const LINK = 150
+  function resize() {
+    DPR = Math.min(2, devicePixelRatio || 1)
+    W = canvas.clientWidth; H = canvas.clientHeight
+    canvas.width = W * DPR; canvas.height = H * DPR
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0)
+    const count = Math.min(90, Math.floor((W * H) / 15000))
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
+      r: 1.2 + Math.random() * 1.8, hub: Math.random() < 0.12,
+    }))
+    packets = []
+  }
+  function rgb(name) { return css(name) }
+  let colA = '', colC = ''
+  function readColors() { colA = rgb('--accent-rgb'); colC = rgb('--cyan-rgb') }
+  function spawnPacket() {
+    // Pick a random pair of nearby nodes (or send one to the visitor's cursor).
+    const a = nodes[Math.floor(Math.random() * nodes.length)]
+    if (!a) return
+    let b = null
+    if (mouse && Math.random() < 0.45) {
+      const d = Math.hypot(a.x - mouse.x, a.y - mouse.y)
+      if (d < LINK * 1.4) b = mouse
+    }
+    if (!b) {
+      const near = nodes.filter((o) => o !== a && Math.hypot(o.x - a.x, o.y - a.y) < LINK)
+      b = near[Math.floor(Math.random() * near.length)]
+    }
+    if (b) packets.push({ a, b, t: 0, speed: 0.012 + Math.random() * 0.018, toMouse: b === mouse })
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H)
+    for (const p of nodes) {
+      p.x += p.vx; p.y += p.vy
+      if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20
+      if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20
+      if (mouse) {
+        // Gentle pull towards the cursor: the visitor is a client joining the network.
+        const dx = mouse.x - p.x, dy = mouse.y - p.y, d = Math.hypot(dx, dy)
+        if (d < 220 && d > 30) { p.x += (dx / d) * 0.18; p.y += (dy / d) * 0.18 }
+      }
+    }
+    ctx.lineWidth = 1
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i]
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y)
+        if (d < LINK) {
+          ctx.strokeStyle = `rgb(${colA} / ${(1 - d / LINK) * 0.22})`
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke()
+        }
+      }
+      if (mouse) {
+        const d = Math.hypot(a.x - mouse.x, a.y - mouse.y)
+        if (d < LINK * 1.4) {
+          ctx.strokeStyle = `rgb(${colC} / ${(1 - d / (LINK * 1.4)) * 0.45})`
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke()
+        }
+      }
+    }
+    for (const p of nodes) {
+      ctx.fillStyle = p.hub ? `rgb(${colC} / 0.9)` : `rgb(${colA} / 0.75)`
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.hub ? p.r + 1.4 : p.r, 0, Math.PI * 2); ctx.fill()
+      if (p.hub) { ctx.strokeStyle = `rgb(${colC} / 0.25)`; ctx.beginPath(); ctx.arc(p.x, p.y, p.r + 6, 0, Math.PI * 2); ctx.stroke() }
+    }
+    if (Math.random() < 0.35) spawnPacket()
+    packets = packets.filter((k) => (k.t += k.speed) < 1)
+    for (const k of packets) {
+      const x = k.a.x + (k.b.x - k.a.x) * k.t, y = k.a.y + (k.b.y - k.a.y) * k.t
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 7)
+      g.addColorStop(0, k.toMouse ? `rgb(${colC} / 1)` : 'rgb(255 255 255 / 0.95)')
+      g.addColorStop(1, `rgb(${colC} / 0)`)
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2); ctx.fill()
+    }
+    if (mouse) {
+      ctx.fillStyle = `rgb(${colC} / 0.95)`; ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2); ctx.fill()
+      ctx.strokeStyle = `rgb(${colC} / 0.35)`; ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 10 + Math.sin(performance.now() / 300) * 2, 0, Math.PI * 2); ctx.stroke()
+    }
+    raf = heroVisible && !document.hidden ? requestAnimationFrame(frame) : 0
+  }
+  const startCanvas = () => { if (!raf && !reduceMotion) raf = requestAnimationFrame(frame) }
+  readColors(); resize()
+  if (reduceMotion) frame() // draw one still frame
+  else startCanvas()
+  addEventListener('resize', () => { resize(); if (reduceMotion) frame() })
+  new MutationObserver(readColors).observe(root, { attributes: true, attributeFilter: ['data-theme'] })
+  const hero = $('.hero')
+  hero.addEventListener('pointermove', (e) => { const r = canvas.getBoundingClientRect(); mouse = { x: e.clientX - r.left, y: e.clientY - r.top } })
+  hero.addEventListener('pointerleave', () => { mouse = null })
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; if (heroVisible) startCanvas() }).observe(hero)
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) startCanvas() })
+
+  /* ---------- Skills marquee ---------- */
+  const stack = ['C#', '.NET', 'ASP.NET Core', 'Web APIs', 'gRPC', 'GraphQL', 'ASP.NET Identity', 'Docker', 'CI/CD', 'GitHub Actions', 'Linux']
+  const stack2 = ['JavaScript', 'TypeScript', 'Vue / Nuxt', 'React', 'Web Audio', 'WebGL', 'PowerShell', 'Bash', 'Git', 'PWA', 'HTML & CSS']
+  $$('.marquee-row').forEach((row, i) => {
+    const items = (i ? stack2 : stack).map((t) => `<span>${t}</span>`).join('')
+    row.innerHTML = items + items // doubled so the loop is seamless
+    row.lastElementChild && [...row.children].slice((i ? stack2 : stack).length).forEach((el) => el.setAttribute('aria-hidden', 'true'))
+  })
+
+  /* ---------- Text scramble for section titles ---------- */
+  const GLYPHS = '!<>-_\\/[]{}—=+*^?#01'
+  function scramble(el) {
+    const final = el.dataset.final || el.textContent
+    el.dataset.final = final
+    if (reduceMotion) return
+    let frameNo = 0
+    const queue = [...final].map((ch, i) => ({ ch, start: Math.floor(Math.random() * 12), end: Math.floor(Math.random() * 12) + 12 + i * 0.6 }))
+    const step = () => {
+      let out = '', done = 0
+      for (const q of queue) {
+        if (frameNo >= q.end || q.ch === ' ') { out += q.ch; done++ }
+        else if (frameNo >= q.start) out += `<span style="color:var(--accent-2);opacity:.75">${GLYPHS[Math.floor(Math.random() * GLYPHS.length)]}</span>`
+        else out += `<span style="opacity:0">${q.ch}</span>`
+      }
+      el.innerHTML = out
+      if (done < queue.length) { frameNo++; requestAnimationFrame(step) } else el.textContent = final
+    }
+    step()
+  }
+
+  /* ---------- Count-up numbers ---------- */
+  // The real number is in the HTML (so print and no-JS show it); it only resets to 0 at the moment it animates.
+  function countUp(el) {
+    const to = +el.dataset.to
+    if (reduceMotion) return
+    const t0 = performance.now(), dur = 1400
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / dur), eased = 1 - Math.pow(1 - p, 3)
+      el.textContent = Math.round(to * eased)
+      if (p < 1) requestAnimationFrame(step)
+    }
+    requestAnimationFrame(step)
+  }
+
+  /* ---------- Scroll reveals, section logs, counters, scramble, DNSify demo ---------- */
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue
+      const el = e.target
+      el.classList.add('in')
+      $$('[data-scramble]', el).forEach(scramble)
+      if (el.matches('[data-scramble]')) scramble(el)
+      $$('.count', el).forEach(countUp)
+      if (el.id === 'dnsify-host') runDnsify()
+      io.unobserve(el)
+    }
+  }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' })
+  $$('.reveal').forEach((el) => io.observe(el))
+  const dnsHost = $('#dnsify').closest('.panel'); dnsHost.id = 'dnsify-host'; io.observe(dnsHost)
+
+  // Active nav link + "request" log per section
+  const navLinks = $$('.nav-links a')
+  const sectionIO = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue
+      const id = e.target.id
+      navLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + id))
+      if (booted && routes[id] && !seenRoutes.has(id)) {
+        seenRoutes.add(id)
+        log(`<span class="t-info">info</span>: Request <span class="t-acc">GET</span> ${routes[id]} <span class="t-ok">→ 200 OK</span> <span class="t-dim">${ms()} ms</span>`)
+      }
+    }
+  }, { rootMargin: '-45% 0px -50% 0px' })
+  $$('main section[id]').forEach((s) => sectionIO.observe(s))
+
+  /* ---------- DNSify demo ---------- */
+  async function runDnsify() {
+    const box = $('#dnsify')
+    const lines = [
+      '<span class="t-prompt">$</span> <span class="t-cmd">sudo ./dnsify.sh</span>',
+      '<span class="t-dim">Saving your current DNS settings…</span> <span class="t-ok">done</span>',
+      'Trying <span class="t-acc">178.22.122.100</span> … <span class="t-warn">✗ timeout</span>',
+      'Trying <span class="t-acc">185.51.200.2</span> … <span class="t-warn">✗ blocked</span>',
+      'Trying <span class="t-acc">10.202.10.202</span> … <span class="t-ok">✓ open.spotify.com reachable</span>',
+      '<span class="t-ok">DNS switched.</span> Enjoy the music 🎧 <span class="t-dim">(original DNS restored on exit)</span>',
+    ]
+    box.innerHTML = ''
+    for (const l of lines) {
+      const d = document.createElement('div'); d.className = 'ln'; d.innerHTML = l; box.appendChild(d)
+      if (!reduceMotion) await sleep(l.includes('Trying') ? 750 : 450)
+    }
+  }
+
+  /* ---------- Live status: real latency from the visitor's browser ---------- */
+  const services = [
+    { name: 'UpliftDone', url: 'https://ecrm.papgroup.ir/' },
+    { name: 'Trip.ir', url: 'https://trip.ir/' },
+    { name: 'Alefba Safar', url: 'https://alefbatour.com/' },
+    { name: 'Wizer', url: 'https://www.wizerco.com/' },
+    { name: 'Mehr Parvaz', url: 'https://mehrparvaz.com/' },
+    { name: 'Qafiyeh-Baz', url: 'https://awlirezaz.github.io/qafiyeh-baz/' },
+    { name: "Party Line '85", url: 'https://awlirezaz.github.io/PartyLine85/' },
+    { name: '100Indica Shop', url: 'https://awlirezaz.github.io/100IndicaFakeShop/' },
+    { name: 'Zarsood', url: 'http://zarsood.gandomgolds.com', private: true },
+  ]
+  const list = $('#status-list')
+  list.innerHTML = services.map((s, i) => `
+    <li><span class="dot ${s.private ? 'lock' : ''}" id="dot${i}"></span>
+      <a href="${s.url}">${s.name}<small>${s.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}</small></a>
+      <span class="ms" id="ms${i}">${s.private ? 'private' : '…'}</span></li>`).join('')
+  async function probe(s, i) {
+    if (s.private) return null
+    const t0 = performance.now()
+    try {
+      const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 6000)
+      await fetch(s.url, { mode: 'no-cors', cache: 'no-store', signal: ctrl.signal })
+      clearTimeout(to)
+      const t = Math.round(performance.now() - t0)
+      $('#dot' + i).classList.add('up')
+      const m = $('#ms' + i); m.textContent = t + ' ms'; m.classList.add('up')
+      return t
+    } catch (e) {
+      $('#ms' + i).textContent = 'no route'
+      $('#ms' + i).title = 'Not reachable from your network right now'
+      return false
+    }
+  }
+  let probed = false
+  new IntersectionObserver(async ([e], obs) => {
+    if (!e.isIntersecting || probed) return
+    probed = true; obs.disconnect()
+    const results = await Promise.all(services.map(probe))
+    const up = results.filter((r) => typeof r === 'number').length
+    const total = services.filter((s) => !s.private).length
+    $('#all-ok').innerHTML = `<span class="pulse"></span>${up}/${total} reachable`
+    if (booted) log(`<span class="t-info">info</span>: HealthChecks <span class="t-ok">${up}/${total} healthy</span>`)
+  }, { threshold: 0.3 }).observe($('#status-panel'))
+
+  /* ---------- Pointer effects: spotlight, tilt + glare, magnetic buttons, glow ---------- */
+  if (finePointer && !reduceMotion) {
+    document.body.classList.add('has-pointer')
+    const glow = $('.cursor-glow')
+    addEventListener('pointermove', (e) => { glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)` }, { passive: true })
+
+    $$('.spot').forEach((el) => el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect()
+      el.style.setProperty('--mx', `${e.clientX - r.left}px`); el.style.setProperty('--my', `${e.clientY - r.top}px`)
+    }))
+
+    $$('.tilt-wrap').forEach((wrap) => {
+      const shot = $('.tilt', wrap)
+      wrap.addEventListener('pointermove', (e) => {
+        const r = wrap.getBoundingClientRect()
+        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height
+        shot.style.transition = 'transform .12s linear'
+        shot.style.transform = `rotateY(${(px - 0.5) * 12}deg) rotateX(${(0.5 - py) * 10}deg) translateZ(10px)`
+        shot.style.setProperty('--gx', `${px * 100}%`); shot.style.setProperty('--gy', `${py * 100}%`)
+      })
+      wrap.addEventListener('pointerleave', () => { shot.style.transition = ''; shot.style.transform = '' })
+    })
+
+    $$('.magnetic').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect()
+        el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.22}px, ${(e.clientY - r.top - r.height / 2) * 0.3}px)`
+      })
+      el.addEventListener('pointerleave', () => { el.style.transform = '' })
+    })
+  }
+
+  /* ---------- Scroll progress + nav shadow ---------- */
+  const bar = $('.progress'), nav = $('.nav')
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`
+    nav.classList.toggle('scrolled', scrollY > 10)
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll()
+
+  /* ---------- Copy email ---------- */
+  const toast = $('.toast'); let toastT
+  const showToast = (msg) => { toast.textContent = msg; toast.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => toast.classList.remove('show'), 2200) }
+  $$('.copy-email').forEach((b) => b.addEventListener('click', async () => {
+    const email = 'ahmadialireza317@gmail.com'
+    try { await navigator.clipboard.writeText(email); showToast('📋 Email copied — talk soon!') }
+    catch (e) { location.href = 'mailto:' + email }
+    if (booted) log(`<span class="t-acc">POST</span> /contact/copy-email <span class="t-ok">→ 201 Created</span> <span class="t-dim">${ms()} ms</span>`)
+  }))
+
+  /* ---------- A hello for fellow developers ---------- */
+  console.log('%c👋 Hey, fellow developer!', 'font: 700 16px system-ui; color: #7c8cff')
+  console.log('%cThis page is hand-written HTML, CSS and JS — no frameworks. Want to talk? ahmadialireza317@gmail.com', 'font: 13px system-ui; color: #22d3ee')
+})()
 </script>
 </body>
 </html>
