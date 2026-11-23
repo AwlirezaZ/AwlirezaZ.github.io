@@ -124,10 +124,6 @@ a.chip:hover { border-color: var(--accent); }
 .code pre { margin: 0; padding: 20px 22px 24px; white-space: pre; overflow-x: auto; }
 .k { color: #c792ea; } .t { color: #82aaff; } .s { color: #c3e88d; } .p { color: #89ddff; } .c { color: #676e95; } .n { color: #f78c6c; }
 
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-top: 64px; }
-.stat { background: var(--surface); padding: 22px 24px; }
-.stat b { display: block; font: 650 32px/1.1 var(--serif); color: var(--ink); letter-spacing: -0.02em; }
-.stat span { font-size: 14px; color: var(--muted); }
 
 /* ---------- Sections ---------- */
 section { padding: 72px 0; }
@@ -186,18 +182,13 @@ section { padding: 72px 0; }
 .card .links { margin-top: auto; }
 
 /* Open source */
-.oss { display: grid; grid-template-columns: 1.2fr 1fr; gap: 22px; }
-.oss-main, .oss-list { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+.oss { display: grid; gap: 22px; }
+.oss-main { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
 .oss-main h3 { font: 650 26px/1.2 var(--serif); margin: 12px 0 8px; display: flex; align-items: center; gap: 12px; }
+.oss-main p { max-width: 62ch; }
 .star { font: 500 13px/1 var(--mono); color: #b7791f; background: #fdf3dc; padding: 6px 10px; border-radius: 8px; }
 :root[data-theme="dark"] .star { background: #3a2f14; color: #f5c66b; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .star { background: #3a2f14; color: #f5c66b; } }
-.oss-list h3 { font: 600 16px/1.3 var(--sans); margin: 0 0 14px; }
-.oss-list ul { list-style: none; margin: 0; padding: 0; }
-.oss-list li + li { border-top: 1px solid var(--line); }
-.oss-list a { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; text-decoration: none; font-size: 15px; }
-.oss-list a span:last-child { font: 12.5px/1.6 var(--mono); color: var(--muted); text-align: right; }
-.oss-list a:hover span:first-child { color: var(--accent); }
 
 /* Skills */
 .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
@@ -238,7 +229,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 @media (max-width: 640px) {
   .wrap { padding: 0 16px; }
   .hero { padding: 56px 0 48px; }
-  .stats { grid-template-columns: 1fr 1fr; }
   .games, .side, .skills { grid-template-columns: 1fr; }
   .project { padding: 18px; }
   .contact { padding: 32px 22px; border-radius: 22px; }
@@ -266,10 +256,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .eyebrow { padding: 4pt 8pt; font-size: 8.5pt; }
   .contact-chips { margin-top: 10pt; gap: 5pt; }
   .chip { padding: 4pt 8pt; font-size: 9pt; }
-  .stats { margin-top: 12pt; border-radius: 8pt; }
-  .stat { padding: 8pt 10pt; }
-  .stat b { font-size: 16pt; }
-  .stat span { font-size: 8.5pt; }
   .section-head { margin-bottom: 10pt; display: block; }
   .section-head h2 { font-size: 17pt; margin-top: 4pt; }
   .section-head p { font-size: 9pt; margin-top: 3pt; max-width: none; }
@@ -298,11 +284,9 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .card h3 { font-size: 12.5pt; margin: 4pt 0 3pt; }
   .card p { font-size: 8.5pt; margin-bottom: 6pt; }
   .oss, .skills { gap: 8pt; }
-  .oss { grid-template-columns: 1.2fr 1fr; }
-  .oss-main, .oss-list, .skill { padding: 10pt; border-radius: 10pt; break-inside: avoid; }
+  .oss-main, .skill { padding: 10pt; border-radius: 10pt; break-inside: avoid; }
   .oss-main h3 { font-size: 13pt; }
   .oss-main p { font-size: 9pt; }
-  .oss-list a { padding: 3pt 0; font-size: 9pt; }
   .skills { grid-template-columns: repeat(3, 1fr); }
   .skill.primary { box-shadow: none; }
   .skill h3 { font-size: 10.5pt; } .skill .note { font-size: 8.5pt; margin-bottom: 6pt; }
@@ -385,14 +369,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 <span class="k">await</span> alireza.<span class="p">BuildAsync</span>(<span class="s">"something good"</span>);
 <span class="c">// ✓ Build succeeded · 0 warnings</span></pre>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat"><b>8</b><span>products & tools shipped</span></div>
-      <div class="stat"><b>4</b><span>games on Google Play</span></div>
-      <div class="stat"><b>26K+</b><span>game downloads</span></div>
-      <div class="stat"><b>28★</b><span>on my top open-source repo</span></div>
     </div>
   </div>
 </header>
@@ -583,7 +559,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   <div class="wrap">
     <div class="section-head">
       <div><div class="kicker">04 · Open source</div><h2>On GitHub</h2></div>
-      <p>Tools people actually use, and the .NET labs where I try things out.</p>
+      <p>A small tool that people actually use.</p>
     </div>
     <div class="oss">
       <div class="oss-main">
@@ -594,16 +570,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
           restricted, checks connectivity automatically, and restores your original DNS settings on exit.
         </p>
         <div class="links"><a class="btn" href="https://github.com/AwlirezaZ/DNSify" data-url="github.com/AwlirezaZ/DNSify"><svg><use href="#i-code"/></svg>View on GitHub</a></div>
-      </div>
-      <div class="oss-list">
-        <h3>.NET labs</h3>
-        <ul>
-          <li><a href="https://github.com/AwlirezaZ/gRPC_Sample"><span>gRPC service</span><span>gRPC_Sample</span></a></li>
-          <li><a href="https://github.com/AwlirezaZ/graphQLSample"><span>GraphQL API</span><span>graphQLSample</span></a></li>
-          <li><a href="https://github.com/AwlirezaZ/IdentityApiEndpointsSampleDotnet8"><span>Identity API endpoints (.NET 8)</span><span>IdentityApiEndpoints…</span></a></li>
-          <li><a href="https://github.com/AwlirezaZ/AutomateCICD"><span>Automated CI/CD</span><span>AutomateCICD</span></a></li>
-          <li><a href="https://github.com/AwlirezaZ/MetricsPlayground"><span>Metrics playground</span><span>MetricsPlayground</span></a></li>
-        </ul>
       </div>
     </div>
   </div>
