@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alireza Ahmadi — Backend Developer (.NET)</title>
+<meta name="description" content="Alireza Ahmadi — backend developer (.NET) in Tehran. Travel booking, customer engagement, fintech panels, mobile games and web experiments.">
+<meta property="og:title" content="Alireza Ahmadi — Backend Developer (.NET)">
+<meta property="og:description" content="Travel booking, customer engagement, fintech panels, mobile games and web experiments.">
+<meta property="og:image" content="https://awlirezaz.github.io/assets/upliftdone.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%233451d1'/><text x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='white'>AA</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  // Apply the saved theme before first paint (falls back to the system setting).
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t } catch (e) {}
+</script>
+<style>
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --soft: #f1efe9;
+  --line: #e4e1d8;
+  --ink: #16161a;
+  --body: #45444d;
+  --muted: #76757f;
+  --accent: #3451d1;
+  --accent-soft: #e8ecfd;
+  --accent-ink: #2a40a8;
+  --good: #11865a;
+  --shadow: 0 1px 2px rgb(20 20 30 / 0.04), 0 8px 30px rgb(20 20 30 / 0.07);
+  --code-bg: #15161c;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1014; --surface: #17181e; --soft: #1e2028; --line: #2a2c36; --ink: #f3f2ee; --body: #c5c4cc;
+    --muted: #8c8b96; --accent: #8da2ff; --accent-soft: #1f2645; --accent-ink: #b3c0ff; --good: #4fd39b;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 40px rgb(0 0 0 / 0.35); --code-bg: #0b0c10; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1014; --surface: #17181e; --soft: #1e2028; --line: #2a2c36; --ink: #f3f2ee; --body: #c5c4cc;
+  --muted: #8c8b96; --accent: #8da2ff; --accent-soft: #1f2645; --accent-ink: #b3c0ff; --good: #4fd39b;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 40px rgb(0 0 0 / 0.35); --code-bg: #0b0c10; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--body);
+  font: 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3 { color: var(--ink); margin: 0; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; color: var(--ink); }
+.logo-mark {
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
+  background: var(--accent); color: #fff; font: 650 14px/1 var(--serif); letter-spacing: 0.02em;
+}
+.nav-links { display: flex; gap: 22px; margin-left: auto; }
+.nav-links a { text-decoration: none; font-size: 14px; color: var(--muted); transition: color .15s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+.icon-btn {
+  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.icon-btn svg { width: 18px; height: 18px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 10px;
+  font: 500 14px/1 var(--sans); text-decoration: none; white-space: nowrap; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); transition: transform .15s, border-color .15s;
+}
+.btn:hover { border-color: var(--muted); }
+.btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn-primary:hover { transform: translateY(-1px); border-color: var(--ink); }
+.btn svg { width: 16px; height: 16px; }
+
+/* ---------- Hero ---------- */
+.hero { padding: 88px 0 72px; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
+/* Let grid columns shrink below their content width (the code box would otherwise push the page wider than a phone). */
+.hero-grid > *, .project > *, .oss > *, .contact > * { min-width: 0; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px; font: 500 13px/1 var(--mono); color: var(--accent-ink);
+  background: var(--accent-soft); padding: 8px 12px; border-radius: 999px;
+}
+.eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 4px color-mix(in srgb, var(--good) 22%, transparent); }
+.hero h1 { font: 650 clamp(44px, 6.2vw, 76px)/1.02 var(--serif); letter-spacing: -0.025em; margin: 22px 0 18px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lead { font-size: 19px; line-height: 1.6; max-width: 34em; margin: 0; }
+.contact-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px; font-size: 14px;
+  background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--ink); transition: border-color .15s;
+}
+a.chip:hover { border-color: var(--accent); }
+.chip svg { width: 16px; height: 16px; color: var(--muted); flex: none; }
+
+.code {
+  background: var(--code-bg); color: #e6e6ec; border-radius: 18px; box-shadow: var(--shadow);
+  font: 14px/1.75 var(--mono); overflow: hidden; border: 1px solid rgb(255 255 255 / 0.06);
+}
+.code-bar { display: flex; align-items: center; gap: 7px; padding: 14px 16px; border-bottom: 1px solid rgb(255 255 255 / 0.07); }
+.code-bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a3b45; }
+.code-bar span { margin-left: 10px; font-size: 12px; color: #8b8b98; }
+.code pre { margin: 0; padding: 20px 22px 24px; white-space: pre; overflow-x: auto; }
+.k { color: #c792ea; } .t { color: #82aaff; } .s { color: #c3e88d; } .p { color: #89ddff; } .c { color: #676e95; } .n { color: #f78c6c; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-top: 64px; }
+.stat { background: var(--surface); padding: 22px 24px; }
+.stat b { display: block; font: 650 32px/1.1 var(--serif); color: var(--ink); letter-spacing: -0.02em; }
+.stat span { font-size: 14px; color: var(--muted); }
+
+/* ---------- Sections ---------- */
+section { padding: 72px 0; }
+.section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+.kicker { font: 500 13px/1 var(--mono); color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.08em; }
+.section-head h2 { font: 650 clamp(30px, 3.6vw, 42px)/1.1 var(--serif); letter-spacing: -0.02em; margin-top: 12px; }
+.section-head p { max-width: 30em; margin: 0; color: var(--muted); }
+
+/* Browser-framed screenshot */
+.shot { border-radius: 14px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.shot-bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: var(--soft); border-bottom: 1px solid var(--line); }
+.shot-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.shot-bar span {
+  margin-left: 8px; flex: 1; font: 12px/1 var(--mono); color: var(--muted); background: var(--surface);
+  border-radius: 6px; padding: 6px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+
+/* Featured work */
+.work { display: grid; gap: 28px; }
+.project {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px;
+}
+.project:nth-child(even) .shot { order: 2; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font: 500 12px/1 var(--mono); color: var(--muted); }
+.meta .role { color: var(--good); }
+.project h3 { font: 650 30px/1.15 var(--serif); letter-spacing: -0.015em; margin: 14px 0 6px; }
+.project .sub { color: var(--accent-ink); font-weight: 500; margin: 0 0 14px; }
+.project p { margin: 0 0 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 22px; padding: 0; list-style: none; }
+.tags li { font-size: 13px; padding: 5px 10px; border-radius: 8px; background: var(--soft); color: var(--body); }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Games */
+.games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.game {
+  display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px;
+  text-decoration: none; color: inherit; transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.game:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); }
+.game img { width: 76px; height: 76px; border-radius: 20px; box-shadow: 0 6px 18px rgb(0 0 0 / 0.12); }
+.game h3 { font: 600 18px/1.3 var(--sans); margin: 18px 0 6px; }
+.game p { margin: 0 0 18px; font-size: 14.5px; line-height: 1.55; }
+.game .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font: 500 12.5px/1 var(--mono); color: var(--muted); }
+.downloads { color: var(--good); }
+.publisher { margin-top: 18px; font-size: 14px; color: var(--muted); }
+
+/* Side projects */
+.side { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.card .shot { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+.card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+.card h3 { font: 650 22px/1.2 var(--serif); margin: 10px 0 8px; }
+.card p { margin: 0 0 16px; font-size: 15px; }
+.card .links { margin-top: auto; }
+
+/* Open source */
+.oss { display: grid; grid-template-columns: 1.2fr 1fr; gap: 22px; }
+.oss-main, .oss-list { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+.oss-main h3 { font: 650 26px/1.2 var(--serif); margin: 12px 0 8px; display: flex; align-items: center; gap: 12px; }
+.star { font: 500 13px/1 var(--mono); color: #b7791f; background: #fdf3dc; padding: 6px 10px; border-radius: 8px; }
+:root[data-theme="dark"] .star { background: #3a2f14; color: #f5c66b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .star { background: #3a2f14; color: #f5c66b; } }
+.oss-list h3 { font: 600 16px/1.3 var(--sans); margin: 0 0 14px; }
+.oss-list ul { list-style: none; margin: 0; padding: 0; }
+.oss-list li + li { border-top: 1px solid var(--line); }
+.oss-list a { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; text-decoration: none; font-size: 15px; }
+.oss-list a span:last-child { font: 12.5px/1.6 var(--mono); color: var(--muted); text-align: right; }
+.oss-list a:hover span:first-child { color: var(--accent); }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.skill { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px; }
+.skill.primary { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.skill h3 { font: 600 17px/1.3 var(--sans); margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
+.skill .note { font-size: 14px; color: var(--muted); margin: 0 0 16px; }
+.badge { font: 500 11px/1 var(--mono); color: var(--accent-ink); background: var(--accent-soft); padding: 5px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Contact */
+.contact {
+  background: var(--ink); color: var(--bg); border-radius: 28px; padding: 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center;
+}
+.contact h2 { color: var(--bg); font: 650 clamp(32px, 4vw, 48px)/1.08 var(--serif); letter-spacing: -0.02em; }
+.contact p { color: color-mix(in srgb, var(--bg) 72%, transparent); margin: 14px 0 0; font-size: 17px; }
+.contact-list { display: grid; gap: 10px; }
+.contact-list a {
+  display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 14px; text-decoration: none;
+  background: color-mix(in srgb, var(--bg) 8%, transparent); border: 1px solid color-mix(in srgb, var(--bg) 14%, transparent);
+  color: var(--bg); font-size: 15.5px; transition: background .15s;
+}
+.contact-list a:hover { background: color-mix(in srgb, var(--bg) 14%, transparent); }
+.contact-list svg { width: 18px; height: 18px; opacity: 0.75; flex: none; }
+
+footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.print-only { display: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .hero-grid, .project, .oss, .contact { grid-template-columns: 1fr; }
+  .project:nth-child(even) .shot { order: 0; }
+  .games { grid-template-columns: repeat(2, 1fr); }
+  .side, .skills { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .nav-actions { margin-left: auto; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  .hero { padding: 56px 0 48px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .games, .side, .skills { grid-template-columns: 1fr; }
+  .project { padding: 18px; }
+  .contact { padding: 32px 22px; border-radius: 22px; }
+  .section-head { flex-direction: column; align-items: start; }
+  .btn-label { display: none; }
+}
+
+/* ---------- Print / PDF ---------- */
+@page { size: A4; margin: 14mm 13mm; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #fff; --surface: #fff; --soft: #f3f3f1; --line: #dddcd6; --ink: #111; --body: #333; --muted: #6b6b70;
+    --accent: #2b45c4; --accent-soft: #eef0fd; --accent-ink: #2b45c4; --good: #11865a; --shadow: none; color-scheme: light;
+  }
+  html { font-size: 10pt; }
+  body { font-size: 10pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .nav, .code, .no-print, .game:hover { display: none !important; }
+  .print-only { display: block; }
+  .wrap { max-width: none; padding: 0; }
+  section { padding: 14pt 0 4pt; }
+  .hero { padding: 0 0 6pt; }
+  .hero-grid { display: block; }
+  .hero h1 { font-size: 30pt; margin: 6pt 0 6pt; }
+  .lead { font-size: 11pt; max-width: none; }
+  .eyebrow { padding: 4pt 8pt; font-size: 8.5pt; }
+  .contact-chips { margin-top: 10pt; gap: 5pt; }
+  .chip { padding: 4pt 8pt; font-size: 9pt; }
+  .stats { margin-top: 12pt; border-radius: 8pt; }
+  .stat { padding: 8pt 10pt; }
+  .stat b { font-size: 16pt; }
+  .stat span { font-size: 8.5pt; }
+  .section-head { margin-bottom: 10pt; display: block; }
+  .section-head h2 { font-size: 17pt; margin-top: 4pt; }
+  .section-head p { font-size: 9pt; margin-top: 3pt; max-width: none; }
+  .work { gap: 8pt; }
+  .project { grid-template-columns: 34% 1fr; gap: 14pt; padding: 10pt; border-radius: 10pt; break-inside: avoid; }
+  .project:nth-child(even) .shot { order: 0; }
+  .project h3 { font-size: 14pt; margin: 5pt 0 2pt; }
+  .project .sub { margin-bottom: 4pt; }
+  .project p { margin-bottom: 6pt; font-size: 9.5pt; }
+  .tags { margin-bottom: 6pt; } .tags li { font-size: 8pt; padding: 2pt 6pt; }
+  .links .btn { height: auto; padding: 0; border: 0; background: none; font-size: 8.5pt; color: var(--accent); }
+  .links .btn svg { display: none; }
+  .links .btn::after { content: " — " attr(data-url); color: var(--muted); }
+  .shot { border-radius: 6pt; }
+  .shot-bar { padding: 4pt 6pt; } .shot-bar span { font-size: 7pt; padding: 2pt 5pt; }
+  .games { grid-template-columns: repeat(4, 1fr); gap: 7pt; }
+  .game { padding: 9pt; border-radius: 10pt; break-inside: avoid; }
+  .game img { width: 40pt; height: 40pt; border-radius: 10pt; box-shadow: none; }
+  .game h3 { font-size: 10.5pt; margin: 6pt 0 3pt; }
+  .game p { font-size: 8.5pt; margin-bottom: 6pt; }
+  .game .foot { font-size: 8pt; }
+  .publisher { font-size: 9pt; margin-top: 6pt; }
+  .side { grid-template-columns: repeat(3, 1fr); gap: 8pt; }
+  .card { border-radius: 10pt; break-inside: avoid; }
+  .card-body { padding: 9pt; }
+  .card h3 { font-size: 12.5pt; margin: 4pt 0 3pt; }
+  .card p { font-size: 8.5pt; margin-bottom: 6pt; }
+  .oss, .skills { gap: 8pt; }
+  .oss { grid-template-columns: 1.2fr 1fr; }
+  .oss-main, .oss-list, .skill { padding: 10pt; border-radius: 10pt; break-inside: avoid; }
+  .oss-main h3 { font-size: 13pt; }
+  .oss-main p { font-size: 9pt; }
+  .oss-list a { padding: 3pt 0; font-size: 9pt; }
+  .skills { grid-template-columns: repeat(3, 1fr); }
+  .skill.primary { box-shadow: none; }
+  .skill h3 { font-size: 10.5pt; } .skill .note { font-size: 8.5pt; margin-bottom: 6pt; }
+  .contact { display: none; }
+  footer { padding: 10pt 0 0; font-size: 8.5pt; }
+  /* Let sections flow; keep each heading with the content under it. */
+  .section-head { break-after: avoid; }
+  .links { gap: 2pt 10pt; }
+  /* Short sections stay on one page, so a heading never ends up alone at the bottom. */
+  #side, #oss, #skills { break-inside: avoid; }
+  /* Side cards: print just the live URL (no label, no Code link). */
+  .card .links .btn + .btn { display: none; }
+  .card .links .btn { font-size: 0; }
+  .card .links .btn::after { content: attr(data-url); font-size: 8pt; overflow-wrap: anywhere; }
+  a { text-decoration: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Icons, reused below with <use href="#..."> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 3.2v17.6c0 .5.5.8.9.6L20 13.1c.5-.3.5-.9 0-1.2L5.4 2.6c-.4-.2-.9.1-.9.6z"/></symbol>
+</svg>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-mark">AA</span> Alireza Ahmadi</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#games">Games</a>
+      <a href="#side">Side projects</a>
+      <a href="#oss">Open source</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode"><svg><use href="#i-moon"/></svg></button>
+      <a class="btn btn-primary" href="Alireza-Ahmadi-Portfolio.pdf" download><svg><use href="#i-download"/></svg><span class="btn-label">Résumé PDF</span></a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Backend Developer · .NET</span>
+      <h1>Alireza<br><em>Ahmadi</em></h1>
+      <p class="lead">
+        I'm a developer focused on the backend, mostly in C# and .NET. I've worked on travel-booking platforms,
+        a self-hosted customer-engagement platform, a fintech panel and multiplayer mobile games — and I ship
+        odd little web experiments on the side.
+      </p>
+      <div class="contact-chips">
+        <a class="chip" href="mailto:ahmadialireza317@gmail.com"><svg><use href="#i-mail"/></svg>ahmadialireza317@gmail.com</a>
+        <a class="chip" href="tel:+989104965374"><svg><use href="#i-phone"/></svg>+98 910 496 5374</a>
+        <a class="chip" href="https://github.com/AwlirezaZ"><svg><use href="#i-github"/></svg>github.com/AwlirezaZ</a>
+        <span class="chip"><svg><use href="#i-pin"/></svg>Tehran, Iran</span>
+      </div>
+    </div>
+    <div class="code" aria-hidden="true">
+      <div class="code-bar"><i></i><i></i><i></i><span>Developer.cs</span></div>
+<pre><span class="k">var</span> alireza = <span class="k">new</span> <span class="t">Developer</span>
+{
+    Name   = <span class="s">"Alireza Ahmadi"</span>,
+    Focus  = <span class="t">Focus</span>.<span class="p">Backend</span>,
+    Stack  = [<span class="s">".NET"</span>, <span class="s">"C#"</span>, <span class="s">"ASP.NET Core"</span>],
+    Ships  = [<span class="s">"web"</span>, <span class="s">"games"</span>, <span class="s">"tools"</span>],
+    Based  = <span class="s">"Tehran, Iran"</span>
+};
+
+<span class="k">await</span> alireza.<span class="p">BuildAsync</span>(<span class="s">"something good"</span>);
+<span class="c">// ✓ Build succeeded · 0 warnings</span></pre>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>8</b><span>products & tools shipped</span></div>
+      <div class="stat"><b>4</b><span>games on Google Play</span></div>
+      <div class="stat"><b>26K+</b><span>game downloads</span></div>
+      <div class="stat"><b>28★</b><span>on my top open-source repo</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">01 · Selected work</div><h2>Products I've worked on</h2></div>
+      <p>Platforms in production: customer messaging, flight and tour booking, and a back-office tool where the numbers have to be right.</p>
+    </div>
+
+    <div class="work">
+      <article class="project">
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>ecrm.papgroup.ir</span></div>
+          <img src="assets/upliftdone.jpg" alt="UpliftDone landing page" width="1200" height="750" loading="lazy">
+        </div>
+        <div>
+          <div class="meta"><span class="role">● Role: Developer</span><span>·</span><span>PAP Group</span></div>
+          <h3>UpliftDone</h3>
+          <p class="sub">Self-hosted customer-engagement platform</p>
+          <p>
+            Events from web, mobile and server SDKs stream into a single customer profile. Audience segments
+            recompute live as events arrive, and campaigns and drag-and-drop journeys reach customers over
+            email, SMS, WhatsApp and web push — with A/B tests, control groups, frequency caps, quiet hours
+            and per-link attribution.
+          </p>
+          <ul class="tags"><li>Event streaming</li><li>Live segmentation</li><li>Multi-channel messaging</li><li>Analytics</li></ul>
+          <div class="links"><a class="btn" href="https://ecrm.papgroup.ir/" data-url="ecrm.papgroup.ir">Visit site <svg><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>trip.ir</span></div>
+          <img src="assets/trip.jpg" alt="Trip.ir flight search page" width="1200" height="750" loading="lazy">
+        </div>
+        <div>
+          <div class="meta"><span class="role">● Role: Developer</span></div>
+          <h3>Trip.ir</h3>
+          <p class="sub">Online flight-booking platform</p>
+          <p>
+            Domestic and international flight tickets from scheduled and charter airlines, plus hotel booking,
+            tours and travel insurance. Available on the web and as installable Android and iOS apps, with online
+            refunds and 24-hour support.
+          </p>
+          <ul class="tags"><li>Travel</li><li>Booking engine</li><li>Payments</li><li>Mobile web app</li></ul>
+          <div class="links"><a class="btn" href="https://trip.ir/" data-url="trip.ir">Visit site <svg><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>alefbatour.com</span></div>
+          <img src="assets/alefbatour.jpg" alt="Alefba Safar travel agency home page" width="1200" height="763" loading="lazy">
+        </div>
+        <div>
+          <div class="meta"><span class="role">● Role: Developer</span></div>
+          <h3>Alefba Safar</h3>
+          <p class="sub">Travel-agency website · alefbatour.com</p>
+          <p>
+            Website for an Isfahan-based travel agency: domestic and international tour packages, hotel and flight
+            booking, visa guides for dozens of countries, charter and seasonal tours, and a travel blog.
+          </p>
+          <ul class="tags"><li>Travel</li><li>Tours & visas</li><li>Content & SEO</li></ul>
+          <div class="links"><a class="btn" href="https://alefbatour.com/" data-url="alefbatour.com">Visit site <svg><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>zarsood.gandomgolds.com</span></div>
+          <img src="assets/zarsood.jpg" alt="Zarsood dashboard with profit calculation, shareholders and daily assets modules" width="1200" height="506" loading="lazy">
+        </div>
+        <div>
+          <div class="meta"><span class="role">● Role: Developer</span><span>·</span><span>Internal panel</span></div>
+          <h3>Zarsood</h3>
+          <p class="sub">Gold-profit distribution system</p>
+          <p>
+            A back-office panel that splits a gold company's daily profit between its shareholders. The manager
+            records the day's profit or pulls the company's daily assets, and every shareholder's share is calculated
+            and listed with date filters. Automatic profit calculation and syncing back to the company system are
+            in progress.
+          </p>
+          <ul class="tags"><li>Fintech</li><li>Back office</li><li>Shareholder accounting</li></ul>
+          <div class="links"><a class="btn" href="http://zarsood.gandomgolds.com" data-url="zarsood.gandomgolds.com">Visit site <svg><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="games">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">02 · Games</div><h2>Live on Google Play</h2></div>
+      <p>Online multiplayer card, board and strategy games, with 26K+ downloads between them.</p>
+    </div>
+    <div class="games">
+      <a class="game" href="https://play.google.com/store/apps/details?id=com.funcogames.hokm">
+        <img src="assets/icon-hokm.png" alt="" width="76" height="76" loading="lazy">
+        <h3>Hokm Chi</h3>
+        <p>Online team card game. Live matches against real players, in-game chat and leaderboards.</p>
+        <div class="foot"><span class="downloads">10K+ downloads</span><span>Card</span></div>
+      </a>
+      <a class="game" href="https://play.google.com/store/apps/details?id=com.funcogames.backgammon">
+        <img src="assets/icon-joft6.png" alt="" width="76" height="76" loading="lazy">
+        <h3>Joft 6</h3>
+        <p>A modern mobile take on backgammon — the classic strategy board game, easy to learn, deep to master.</p>
+        <div class="foot"><span class="downloads">10K+ downloads</span><span>Board</span></div>
+      </a>
+      <a class="game" href="https://play.google.com/store/apps/details?id=com.supersquad.spincoingamemaster">
+        <img src="assets/icon-shahdozd.png" alt="" width="76" height="76" loading="lazy">
+        <h3>ShahDozd</h3>
+        <p>Online strategy game: build a kingdom, manage resources, upgrade buildings, collect cards and raid rivals.</p>
+        <div class="foot"><span class="downloads">5K+ downloads</span><span>Strategy</span></div>
+      </a>
+      <a class="game" href="https://play.google.com/store/apps/details?id=com.funcogames.shelem">
+        <img src="assets/icon-shelem.png" alt="" width="76" height="76" loading="lazy">
+        <h3>Shelem Chi</h3>
+        <p>Online team card game. Find a teammate, read the table and win the hand against real players.</p>
+        <div class="foot"><span class="downloads">1K+ downloads</span><span>Card</span></div>
+      </a>
+    </div>
+    <p class="publisher">Published by <b>Playberry Games</b> · Role: Developer · Download counts from Google Play, November 2026.</p>
+  </div>
+</section>
+
+<section id="side">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">03 · Side projects</div><h2>Things I built for fun</h2></div>
+      <p>Small, polished experiments — each one runs entirely in the browser.</p>
+    </div>
+    <div class="side">
+      <article class="card">
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/qafiyeh-baz</span></div>
+          <img src="assets/qafiyeh.jpg" alt="Qafiyeh-Baz start screen" width="1200" height="750" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>JavaScript · Web Audio · PWA</span></div>
+          <h3>Qafiyeh-Baz</h3>
+          <p>A Persian freestyle-rap trainer. A beat plays, a ball bounces on a 4-beat grid, and you land a rhyme on the fourth. Daily challenges, your own beats with BPM detection, and 9:16 video recording — no backend, works offline.</p>
+          <div class="links">
+            <a class="btn" href="https://awlirezaz.github.io/qafiyeh-baz/" data-url="awlirezaz.github.io/qafiyeh-baz">Play <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/AwlirezaZ/qafiyeh-baz" data-url="github.com/AwlirezaZ/qafiyeh-baz"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/PartyLine85</span></div>
+          <img src="assets/partyline.jpg" alt="Party Line '85 neon city" width="1200" height="750" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>WebGL2 · Web Audio · no libraries</span></div>
+          <h3>Party Line '85</h3>
+          <p>An interactive retro-futuristic art world: a neon city drawn by one unbroken beam of light. Touch any line and it plucks like a string. Raw WebGL2 and Web Audio in a single HTML file.</p>
+          <div class="links">
+            <a class="btn" href="https://awlirezaz.github.io/PartyLine85/" data-url="awlirezaz.github.io/PartyLine85">Open <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/AwlirezaZ/PartyLine85" data-url="github.com/AwlirezaZ/PartyLine85"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/100IndicaFakeShop</span></div>
+          <img src="assets/indica.jpg" alt="100Indica Shop home page" width="800" height="505" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>React · TypeScript · Tailwind</span></div>
+          <h3>100Indica Shop</h3>
+          <p>A parody online store with ~10,000 real products from open-data APIs and a fully simulated checkout — plus a rigged prize wheel, a courier who gets lost, and achievements.</p>
+          <div class="links">
+            <a class="btn" href="https://awlirezaz.github.io/100IndicaFakeShop/" data-url="awlirezaz.github.io/100IndicaFakeShop">Shop <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/AwlirezaZ/100IndicaFakeShop" data-url="github.com/AwlirezaZ/100IndicaFakeShop"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="oss">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">04 · Open source</div><h2>On GitHub</h2></div>
+      <p>Tools people actually use, and the .NET labs where I try things out.</p>
+    </div>
+    <div class="oss">
+      <div class="oss-main">
+        <div class="meta"><span>PowerShell · Bash · Windows & Linux</span></div>
+        <h3>DNSify <span class="star">★ 28</span></h3>
+        <p>
+          A small cross-platform tool that finds a working DNS server to reach Spotify in regions where it's
+          restricted, checks connectivity automatically, and restores your original DNS settings on exit.
+        </p>
+        <div class="links"><a class="btn" href="https://github.com/AwlirezaZ/DNSify" data-url="github.com/AwlirezaZ/DNSify"><svg><use href="#i-code"/></svg>View on GitHub</a></div>
+      </div>
+      <div class="oss-list">
+        <h3>.NET labs</h3>
+        <ul>
+          <li><a href="https://github.com/AwlirezaZ/gRPC_Sample"><span>gRPC service</span><span>gRPC_Sample</span></a></li>
+          <li><a href="https://github.com/AwlirezaZ/graphQLSample"><span>GraphQL API</span><span>graphQLSample</span></a></li>
+          <li><a href="https://github.com/AwlirezaZ/IdentityApiEndpointsSampleDotnet8"><span>Identity API endpoints (.NET 8)</span><span>IdentityApiEndpoints…</span></a></li>
+          <li><a href="https://github.com/AwlirezaZ/AutomateCICD"><span>Automated CI/CD</span><span>AutomateCICD</span></a></li>
+          <li><a href="https://github.com/AwlirezaZ/MetricsPlayground"><span>Metrics playground</span><span>MetricsPlayground</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">05 · Skills</div><h2>What I work with</h2></div>
+      <p>Backend first — with enough frontend and DevOps to ship a whole product.</p>
+    </div>
+    <div class="skills">
+      <div class="skill primary">
+        <h3>Backend <span class="badge">Main</span></h3>
+        <p class="note">Where I spend most of my time.</p>
+        <ul class="tags"><li>C#</li><li>.NET</li><li>ASP.NET Core</li><li>Web APIs</li><li>gRPC</li><li>GraphQL</li><li>ASP.NET Identity</li></ul>
+      </div>
+      <div class="skill">
+        <h3>DevOps & tooling</h3>
+        <p class="note">Getting code built, shipped and observed.</p>
+        <ul class="tags"><li>Docker</li><li>CI/CD</li><li>GitHub Actions</li><li>Git</li><li>Linux</li><li>Shell & PowerShell</li></ul>
+      </div>
+      <div class="skill">
+        <h3>Frontend</h3>
+        <p class="note">Enough to build the whole thing end to end.</p>
+        <ul class="tags"><li>JavaScript</li><li>TypeScript</li><li>Vue / Nuxt</li><li>React</li><li>HTML & CSS</li><li>Web Audio / WebGL</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="no-print">
+  <div class="wrap">
+    <div class="contact">
+      <div>
+        <h2>Let's build something good.</h2>
+        <p>Have a backend that needs building, or a product that needs another developer? I'd love to hear about it.</p>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:ahmadialireza317@gmail.com"><svg><use href="#i-mail"/></svg>ahmadialireza317@gmail.com</a>
+        <a href="tel:+989104965374"><svg><use href="#i-phone"/></svg>+98 910 496 5374</a>
+        <a href="https://github.com/AwlirezaZ"><svg><use href="#i-github"/></svg>github.com/AwlirezaZ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Alireza Ahmadi</span>
+    <span class="no-print">Hand-built in plain HTML & CSS · <a href="https://github.com/AwlirezaZ/AwlirezaZ.github.io">Source</a></span>
+    <span class="print-only">Live portfolio: awlirezaz.github.io</span>
+  </div>
+</footer>
+
+<script>
+  // Dark-mode toggle (remembers the choice; otherwise follows the system setting).
+  const root = document.documentElement
+  const btn = document.getElementById('theme')
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+  const syncIcon = () => btn.querySelector('use').setAttribute('href', isDark() ? '#i-sun' : '#i-moon')
+  btn.addEventListener('click', () => {
+    root.dataset.theme = isDark() ? 'light' : 'dark'
+    try { localStorage.setItem('theme', root.dataset.theme) } catch (e) {}
+    syncIcon()
+  })
+  syncIcon()
+  document.getElementById('year').textContent = new Date().getFullYear()
+</script>
+</body>
+</html>
