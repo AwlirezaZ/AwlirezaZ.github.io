@@ -493,6 +493,7 @@ footer a { color: var(--body); }
   .game .foot { font-size: 8pt; }
   .publisher { font-size: 9pt; margin-top: 6pt; }
   #games, #side, #oss, #skills { break-inside: avoid; }
+  #work { break-before: page; }
   .hero h1 .grad-text .char { background: none; color: var(--accent); }
   .side { grid-template-columns: repeat(3, 1fr); gap: 8pt; }
   .card { border-radius: 10pt; break-inside: avoid; }
@@ -546,9 +547,9 @@ footer a { color: var(--body); }
   <div class="nav-inner">
     <a class="logo" href="#top"><span class="logo-mark">AA</span> Alireza Ahmadi</a>
     <div class="nav-links">
+      <a href="#side">Side projects</a>
       <a href="#work">Work</a>
       <a href="#games">Games</a>
-      <a href="#side">Side projects</a>
       <a href="#oss">Open source</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
@@ -577,7 +578,7 @@ footer a { color: var(--body); }
           odd little web experiments on the side.
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary magnetic" href="#work">See my work <svg class="arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-primary magnetic" href="#side">See what I've built <svg class="arrow"><use href="#i-arrow"/></svg></a>
           <a class="btn magnetic" href="#contact">Get in touch</a>
         </div>
         <div class="contact-chips">
@@ -604,10 +605,75 @@ footer a { color: var(--body); }
 
 <main>
 
+<section id="side">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="kicker">01 · Side projects</div><h2 data-scramble>Things I built for fun</h2></div>
+      <p>Small, polished experiments — each one runs entirely in the browser. Go on, click them.</p>
+    </div>
+    <div class="side">
+      <article class="card spot reveal" style="--d:0">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/qafiyeh-baz</span></div>
+            <img src="assets/qafiyeh.jpg" alt="Qafiyeh-Baz start screen" width="1200" height="750" loading="lazy">
+            <span class="glare"></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>JavaScript · Web Audio · PWA</span></div>
+          <h3>Qafiyeh-Baz</h3>
+          <p>A Persian freestyle-rap trainer. A beat plays, a ball bounces on a 4-beat grid, and you land a rhyme on the fourth. Daily challenges, your own beats with BPM detection, and 9:16 video recording — no backend, works offline.</p>
+          <div class="links">
+            <a class="btn magnetic" href="https://awlirezaz.github.io/qafiyeh-baz/" data-url="awlirezaz.github.io/qafiyeh-baz">Play <svg class="arrow"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/AwlirezaZ/qafiyeh-baz" data-url="github.com/AwlirezaZ/qafiyeh-baz"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="card spot reveal" style="--d:1">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/PartyLine85</span></div>
+            <img src="assets/partyline.jpg" alt="Party Line '85 neon city" width="1200" height="750" loading="lazy">
+            <span class="glare"></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>WebGL2 · Web Audio · no libraries</span></div>
+          <h3>Party Line '85</h3>
+          <p>An interactive retro-futuristic art world: a neon city drawn by one unbroken beam of light. Touch any line and it plucks like a string. Raw WebGL2 and Web Audio in a single HTML file.</p>
+          <div class="links">
+            <a class="btn magnetic" href="https://awlirezaz.github.io/PartyLine85/" data-url="awlirezaz.github.io/PartyLine85">Open <svg class="arrow"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/AwlirezaZ/PartyLine85" data-url="github.com/AwlirezaZ/PartyLine85"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="card spot reveal" style="--d:2">
+        <div class="tilt-wrap">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/100IndicaFakeShop</span></div>
+            <img src="assets/indica.jpg" alt="100Indica Shop home page" width="800" height="505" loading="lazy">
+            <span class="glare"></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>React · TypeScript · Tailwind</span></div>
+          <h3>100Indica Shop</h3>
+          <p>A parody online store with ~10,000 real products from open-data APIs and a fully simulated checkout — plus a rigged prize wheel, a courier who gets lost, and achievements.</p>
+          <div class="links">
+            <a class="btn magnetic" href="https://awlirezaz.github.io/100IndicaFakeShop/" data-url="awlirezaz.github.io/100IndicaFakeShop">Shop <svg class="arrow"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/AwlirezaZ/100IndicaFakeShop" data-url="github.com/AwlirezaZ/100IndicaFakeShop"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section id="work">
   <div class="wrap">
     <div class="section-head reveal">
-      <div><div class="kicker">01 · Selected work</div><h2 data-scramble>Products I've worked on</h2></div>
+      <div><div class="kicker">02 · Selected work</div><h2 data-scramble>Products I've worked on</h2></div>
       <p>Platforms in production: customer messaging, flight and tour booking, vehicle tracking, and a back-office tool where the numbers have to be right.</p>
     </div>
 
@@ -755,7 +821,7 @@ footer a { color: var(--body); }
 <section id="games">
   <div class="wrap">
     <div class="section-head reveal">
-      <div><div class="kicker">02 · Games</div><h2 data-scramble>Live on Google Play</h2></div>
+      <div><div class="kicker">03 · Games</div><h2 data-scramble>Live on Google Play</h2></div>
       <p>Online multiplayer card, board and strategy games, with <b class="count" data-to="26">26</b>K+ downloads between them.</p>
     </div>
     <div class="games">
@@ -785,71 +851,6 @@ footer a { color: var(--body); }
       </a>
     </div>
     <p class="publisher reveal">Published by <b>Playberry Games</b> · Role: Developer · Download counts from Google Play, November 2026.</p>
-  </div>
-</section>
-
-<section id="side">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div><div class="kicker">03 · Side projects</div><h2 data-scramble>Things I built for fun</h2></div>
-      <p>Small, polished experiments — each one runs entirely in the browser. Go on, click them.</p>
-    </div>
-    <div class="side">
-      <article class="card spot reveal" style="--d:0">
-        <div class="tilt-wrap">
-          <div class="shot tilt">
-            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/qafiyeh-baz</span></div>
-            <img src="assets/qafiyeh.jpg" alt="Qafiyeh-Baz start screen" width="1200" height="750" loading="lazy">
-            <span class="glare"></span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="meta"><span>JavaScript · Web Audio · PWA</span></div>
-          <h3>Qafiyeh-Baz</h3>
-          <p>A Persian freestyle-rap trainer. A beat plays, a ball bounces on a 4-beat grid, and you land a rhyme on the fourth. Daily challenges, your own beats with BPM detection, and 9:16 video recording — no backend, works offline.</p>
-          <div class="links">
-            <a class="btn magnetic" href="https://awlirezaz.github.io/qafiyeh-baz/" data-url="awlirezaz.github.io/qafiyeh-baz">Play <svg class="arrow"><use href="#i-arrow"/></svg></a>
-            <a class="btn" href="https://github.com/AwlirezaZ/qafiyeh-baz" data-url="github.com/AwlirezaZ/qafiyeh-baz"><svg><use href="#i-code"/></svg>Code</a>
-          </div>
-        </div>
-      </article>
-      <article class="card spot reveal" style="--d:1">
-        <div class="tilt-wrap">
-          <div class="shot tilt">
-            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/PartyLine85</span></div>
-            <img src="assets/partyline.jpg" alt="Party Line '85 neon city" width="1200" height="750" loading="lazy">
-            <span class="glare"></span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="meta"><span>WebGL2 · Web Audio · no libraries</span></div>
-          <h3>Party Line '85</h3>
-          <p>An interactive retro-futuristic art world: a neon city drawn by one unbroken beam of light. Touch any line and it plucks like a string. Raw WebGL2 and Web Audio in a single HTML file.</p>
-          <div class="links">
-            <a class="btn magnetic" href="https://awlirezaz.github.io/PartyLine85/" data-url="awlirezaz.github.io/PartyLine85">Open <svg class="arrow"><use href="#i-arrow"/></svg></a>
-            <a class="btn" href="https://github.com/AwlirezaZ/PartyLine85" data-url="github.com/AwlirezaZ/PartyLine85"><svg><use href="#i-code"/></svg>Code</a>
-          </div>
-        </div>
-      </article>
-      <article class="card spot reveal" style="--d:2">
-        <div class="tilt-wrap">
-          <div class="shot tilt">
-            <div class="shot-bar"><i></i><i></i><i></i><span>awlirezaz.github.io/100IndicaFakeShop</span></div>
-            <img src="assets/indica.jpg" alt="100Indica Shop home page" width="800" height="505" loading="lazy">
-            <span class="glare"></span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="meta"><span>React · TypeScript · Tailwind</span></div>
-          <h3>100Indica Shop</h3>
-          <p>A parody online store with ~10,000 real products from open-data APIs and a fully simulated checkout — plus a rigged prize wheel, a courier who gets lost, and achievements.</p>
-          <div class="links">
-            <a class="btn magnetic" href="https://awlirezaz.github.io/100IndicaFakeShop/" data-url="awlirezaz.github.io/100IndicaFakeShop">Shop <svg class="arrow"><use href="#i-arrow"/></svg></a>
-            <a class="btn" href="https://github.com/AwlirezaZ/100IndicaFakeShop" data-url="github.com/AwlirezaZ/100IndicaFakeShop"><svg><use href="#i-code"/></svg>Code</a>
-          </div>
-        </div>
-      </article>
-    </div>
   </div>
 </section>
 
